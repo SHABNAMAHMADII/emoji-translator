@@ -6,7 +6,7 @@ Emoji Translator is a fun AI-powered web application that converts any sentence 
 
 ## 🌐 Live Demo
 
-🔗 **https://emoji-translator.netlify.app**
+https://emojii-translator.netlify.app/
 
 ## ✨ Features
 
