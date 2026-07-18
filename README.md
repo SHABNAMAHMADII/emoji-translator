@@ -1,16 +1,108 @@
-# React + Vite
+# 😄 Emoji Translator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Turn words into emojis. No letters allowed.**
 
-Currently, two official plugins are available:
+Emoji Translator is a fun AI-powered web application that converts any sentence into expressive emoji-only messages. Perfect for chatting with friends, spicing up your social media posts, or just having fun with language!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
 
-## React Compiler
+🔗 **https://emoji-translator.netlify.app**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🤖 **AI Translation** – Uses OpenRouter AI to convert text into emojis
+- 📋 **Copy to Clipboard** – Copy emojis with one click
+- 📚 **Translation History** – Automatically saves all your translations
+- 🗑️ **Delete History** – Remove individual or all translations
+- 🎨 **Beautiful UI** – Clean, modern design with Tailwind CSS
+- 📱 **Responsive** – Works on desktop, tablet, and mobile
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies
+
+- **React** – Frontend framework
+- **Tailwind CSS** – Styling
+- **OpenRouter AI** – AI translation API
+- **Vite** – Build tool
+- **Netlify** – Deployment
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- OpenRouter API key (free)
+
+### Installation
+
+1. **Clone the repository**
+   git clone https://github.com/shabnamahmadii/emoji-translator.git
+   cd emoji-translator
+
+2. **Install dependencies**
+   npm install
+
+3. **Create a `.env` file**
+   VITE_OPENROUTER_API_KEY=your-api-key-here
+
+4. **Start the development server**
+   npm run dev
+
+5. **Open your browser**
+   Go to `http://localhost:5173`
+
+### Building for Production
+
+npm run build
+
+The built files will be in the `dist` folder.
+
+## 🔧 Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| VITE_OPENROUTER_API_KEY | Your OpenRouter API key |
+
+## 📁 Project Structure
+
+emoji-translator/
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── TranslationForm.jsx
+│   │   ├── TranslationResult.jsx
+│   │   ├── HistoryItem.jsx
+│   │   └── EmptyState.jsx
+│   ├── hooks/
+│   │   └── useEmojiTranslation.js
+│   ├── utils/
+│   │   ├── openRouter.js
+│   │   └── clipboard.js
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── public/
+├── .env
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+└── vite.config.js
+
+## 🤝 Contributing
+
+This is a capstone project for CodeWeekend Bootcamp. Feel free to fork and experiment!
+
+## 📝 License
+
+MIT
+
+## 🙏 Acknowledgements
+
+- CodeWeekend Bootcamp – For the amazing learning experience
+- OpenRouter – For providing free AI access
+- Lucide React – For beautiful icons
+
+---
+
+Made with ❤️ by Shabnam Ahmadi
