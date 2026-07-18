@@ -68,25 +68,27 @@ The built files will be in the `dist` folder.
 emoji-translator/
 ├── src/
 │   ├── components/
+│   │   ├── EmptyState.jsx
 │   │   ├── Header.jsx
-│   │   ├── TranslationForm.jsx
-│   │   ├── TranslationResult.jsx
 │   │   ├── HistoryItem.jsx
-│   │   └── EmptyState.jsx
+│   │   ├── TranslationForm.jsx
+│   │   └── TranslationResult.jsx
 │   ├── hooks/
 │   │   └── useEmojiTranslation.js
 │   ├── utils/
-│   │   ├── openRouter.js
-│   │   └── clipboard.js
+│   │   ├── clipboard.js
+│   │   └── openRouter.js
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
 ├── public/
 ├── .env
+├── .gitignore
 ├── index.html
 ├── package.json
-├── tailwind.config.js
+├── package-lock.json
 ├── postcss.config.js
+├── tailwind.config.js
 └── vite.config.js
 
 ## 🤝 Contributing
