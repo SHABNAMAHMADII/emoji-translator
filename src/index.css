@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream text-charcoal font-nunito min-h-screen;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6 transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply bg-coral text-white px-6 py-3 rounded-xl font-bold transition-all duration-200 hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s ease-out;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #FF6B6B;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e55a5a;
+}
