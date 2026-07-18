@@ -6,7 +6,7 @@ Emoji Translator is a fun AI-powered web application that converts any sentence 
 
 ## 🌐 Live Demo
 
-https://emojii-translator.netlify.app/
+🔗 **https://emoji-translator.netlify.app**
 
 ## ✨ Features
 
@@ -36,36 +36,36 @@ https://emojii-translator.netlify.app/
 ### Installation
 
 1. **Clone the repository**
+   ```bash
    git clone https://github.com/shabnamahmadii/emoji-translator.git
    cd emoji-translator
+   ```
 
 2. **Install dependencies**
+   ```bash
    npm install
+   ```
 
 3. **Create a `.env` file**
+   ```
    VITE_OPENROUTER_API_KEY=your-api-key-here
+   ```
 
 4. **Start the development server**
+   ```bash
    npm run dev
+   ```
 
 5. **Open your browser**
    Go to `http://localhost:5173`
 
 ### Building for Production
 
+```bash
 npm run build
+```
 
 The built files will be in the `dist` folder.
-
-## 🔧 Environment Variables
-
-| Variable | Description |
-|----------|-------------|
-| VITE_OPENROUTER_API_KEY | Your OpenRouter API key |
-
-## 📁 Project Structure
-
-## 📁 Project Structure
 
 ## 📁 Project Structure
 
@@ -97,6 +97,11 @@ emoji-translator/
 └── vite.config.js
 ```
 
+## 🔧 Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_OPENROUTER_API_KEY` | Your OpenRouter API key |
 
 ## 🤝 Contributing
 
@@ -108,10 +113,10 @@ MIT
 
 ## 🙏 Acknowledgements
 
-- CodeWeekend Bootcamp – For the amazing learning experience
-- OpenRouter – For providing free AI access
-- Lucide React – For beautiful icons
+- [CodeWeekend Bootcamp](https://codeweekend.dev) – For the amazing learning experience
+- [OpenRouter](https://openrouter.ai) – For providing free AI access
+- [Lucide React](https://lucide.dev/) – For beautiful icons
 
 ---
 
-Made with ❤️ by Shabnam Ahmadi
+**Made with ❤️ by Shabnam Ahmadi**
