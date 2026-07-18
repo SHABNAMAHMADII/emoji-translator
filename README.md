@@ -67,6 +67,8 @@ The built files will be in the `dist` folder.
 
 ## 📁 Project Structure
 
+## 📁 Project Structure
+
 ```
 emoji-translator/
 ├── src/
@@ -94,6 +96,7 @@ emoji-translator/
 ├── tailwind.config.js
 └── vite.config.js
 ```
+
 
 ## 🤝 Contributing
 
