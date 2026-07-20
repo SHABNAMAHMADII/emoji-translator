@@ -4,11 +4,12 @@ import { Sparkles, Send } from 'lucide-react';
 function TranslationForm({ onTranslate, isLoading }) {
   const [text, setText] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (text.trim() && !isLoading) {
-      onTranslate(text.trim());
+      const textToTranslate = text.trim();
       setText('');
+      await onTranslate(textToTranslate);
     }
   };
 
