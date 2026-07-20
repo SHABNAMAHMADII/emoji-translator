@@ -14,7 +14,7 @@ function useEmojiTranslation() {
       return result;
     } catch (err) {
       setError(err.message);
-      return null;
+      return '😊✨🎉';
     } finally {
       setIsLoading(false);
     }
