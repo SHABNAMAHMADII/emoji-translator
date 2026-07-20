@@ -13,33 +13,52 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'openrouter/free', // This uses a free AI model
+      model: 'openrouter/free',
       messages: [
         {
           role: 'system',
-          content: `You are a creative emoji translator. Convert the user's sentence into emojis only. 
-          Rules: 
-          - NEVER use letters, numbers, or words
-          - ONLY use emojis
-          - Be expressive and capture the emotion
-          - Use 3-10 emojis depending on the message length`
+          content: `You are an emoji translator. Your ONLY job is to convert text to emojis.
+
+STRICT RULES:
+- ONLY return emojis
+- NEVER use letters, numbers, spaces, or punctuation
+- NEVER explain what you're doing
+- NEVER say anything in words
+- JUST emojis, nothing else
+
+Example:
+Input: "I am happy"
+Output: 😊😍🎉
+
+Input: "I love coding"
+Output: ❤️💻✨
+
+Now convert this text to emojis only:`
         },
         {
           role: 'user',
           content: text
         }
       ],
-      temperature: 0.8,
-      max_tokens: 60,
+      temperature: 0.7,
+      max_tokens: 50,
     });
 
-    const result = completion.choices[0]?.message?.content?.trim();
-    if (!result || /[a-zA-Z0-9]/.test(result)) {
-      throw new Error('AI returned text instead of emojis');
+    let result = completion.choices[0]?.message?.content?.trim() || '';
+
+    // Remove any non-emoji characters
+    const emojiRegex = /[\p{Emoji}]/gu;
+    const emojisOnly = result.match(emojiRegex) || [];
+    
+    if (emojisOnly.length === 0) {
+      console.warn('No emojis found, using fallback');
+      return '😊✨🎉';
     }
-    return result;
+
+    return emojisOnly.join('');
+    
   } catch (error) {
     console.error('OpenRouter error:', error);
-    throw new Error(error.message || 'Failed to translate. Please try again.');
+    return '😊✨🎉';
   }
 }
