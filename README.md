@@ -1,4 +1,4 @@
-# 😄 Emoji Translator
+#  Emoji Translator
 
 **Turn words into emojis. No letters allowed.**
 
