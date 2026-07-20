@@ -48,7 +48,6 @@ function TranslationForm({ onTranslate, isLoading }) {
           </>
         ) : (
           <>
-            <Sparkles size={22} />
             Translate to Emojis
             <Send size={18} />
           </>
