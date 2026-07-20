@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, FileText } from 'lucide-react';
 import { copyToClipboard } from '../utils/clipboard';
 
 function TranslationResult({ result, originalText }) {
@@ -16,7 +16,9 @@ function TranslationResult({ result, originalText }) {
   return (
     <div className="card bg-gradient-to-br from-coral/5 to-teal/5 border-2 border-coral/20 dark:border-[#e94560]/30 dark:bg-[#16213e] mt-6 animate-slideUp">
       <div className="flex justify-between items-start mb-3">
-        <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold">📝 Original</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold flex items-center gap-1">
+          <FileText size={16} /> Original
+        </span>
       </div>
       <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 italic">"{originalText}"</p>
       
