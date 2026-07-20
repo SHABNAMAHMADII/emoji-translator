@@ -5,6 +5,7 @@ import TranslationResult from './components/TranslationResult';
 import HistoryItem from './components/HistoryItem';
 import EmptyState from './components/EmptyState';
 import HowItWorks from './components/HowItWorks';
+import { Clock } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
 
 function App() {
@@ -91,7 +92,7 @@ function App() {
           <div>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl sm:text-2xl font-bold text-charcoal dark:text-white flex items-center gap-2">
-                📚 History
+                <Clock size={24} /> History
                 <span className="text-sm font-normal text-gray-400">({history.length})</span>
               </h2>
               {history.length > 1 && (
