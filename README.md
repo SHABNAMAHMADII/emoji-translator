@@ -6,7 +6,7 @@ Emoji Translator is a fun AI-powered web application that converts any sentence 
 
 ## 🌐 Live Demo
 
-https://emoji-translator-p2lkkut7q-shabnam-ahmadi-s-projects.vercel.app/
+https://emoji-translator-xi.vercel.app/
 
 ## ✨ Features
 
