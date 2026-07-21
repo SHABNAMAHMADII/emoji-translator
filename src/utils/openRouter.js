@@ -13,7 +13,7 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-exp:free',
+     model: 'openai/gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
