@@ -13,46 +13,32 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'openrouter/free',
+      model: 'meta-llama/llama-3.2-3b-instruct:free',
       messages: [
         {
           role: 'system',
-          content: `You are a precise emoji translator. Convert the following text into a short sequence of emojis that EXACTLY match the meaning.
+          content: `You are an emoji translator. Convert text to emojis.
 
-STRICT RULES:
-- ONLY return emojis
-- NEVER use letters, numbers, or words
-- NEVER add extra text or explanations
-- Use 2-5 emojis that best represent the sentence
-
-IMPORTANT GUIDELINES:
-- Match the exact meaning of each word
-- Use specific, relevant emojis
-- Be creative but accurate
+IMPORTANT RULES:
+1. ONLY return emojis. NO words, NO letters, NO numbers.
+2. Match the EXACT meaning of the text.
+3. Be specific — don't use generic emojis.
 
 EXAMPLES:
-"It's sunny today" → ☀️🌤️🌞
-"It's raining outside" → 🌧️☔💧
-"I love coding" → 💻❤️🔥
-"I'm so happy" → 😊🎉✨
-"I'm tired" → 😴💤🥱
-"Let's go to the beach" → 🏖️🌊🌴
-"Good morning" → 🌅☀️🌞
-"Good night" → 🌙😴💤
-"I'm hungry" → 🍕😋🍔
-"I'm studying" → 📚📖✏️
+- "I love coding" → 💻❤️🔥
+- "It's sunny today" → ☀️🌤️🌞
+- "Good morning" → 🌅☀️🌞
+- "I'm tired" → 😴💤🥱
+- "Let's party" → 🎉🥳🍾
+- "I'm hungry" → 🍕😋🍔
+- "I'm studying" → 📚📖✏️
+- "I'm happy" → 😊🎉✨
 
-Now convert this text to emojis only:
-Input: "${text}"
-Output:`
-        },
-        {
-          role: 'user',
-          content: text
+Now convert this text to emojis only: "${text}"`
         }
       ],
-      temperature: 0.7,
-      max_tokens: 60,
+      temperature: 0.6,
+      max_tokens: 30,
     });
 
     let result = completion.choices[0]?.message?.content?.trim() || '';
