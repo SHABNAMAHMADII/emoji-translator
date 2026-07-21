@@ -17,7 +17,7 @@ export async function translateToEmojis(text) {
       messages: [
         {
           role: 'system',
-          content: `You are an emoji translator. Your ONLY job is to convert text to emojis.
+          content: `You are a creative emoji translator. Your ONLY job is to convert text into a short sequence of emojis that accurately represent the meaning.
 
 STRICT RULES:
 - ONLY return emojis
@@ -26,12 +26,23 @@ STRICT RULES:
 - NEVER say anything in words
 - JUST emojis, nothing else
 
-Example:
-Input: "I am happy"
-Output: 😊😍🎉
+GUIDELINES:
+- Match the exact meaning of the sentence
+- Use specific, relevant emojis (not generic ones)
+- Use 2-6 emojis depending on the message length
+
+EXAMPLES:
+Input: "It's sunny today"
+Output: ☀️🌤️🌞
 
 Input: "I love coding"
-Output: ❤️💻✨
+Output: 💻❤️🔥
+
+Input: "I'm so happy"
+Output: 😊🎉✨
+
+Input: "Let's go to the beach"
+Output: 🏖️🌊🌴
 
 Now convert this text to emojis only:`
         },
@@ -40,8 +51,8 @@ Now convert this text to emojis only:`
           content: text
         }
       ],
-      temperature: 0.7,
-      max_tokens: 50,
+      temperature: 0.8,
+      max_tokens: 60,
     });
 
     let result = completion.choices[0]?.message?.content?.trim() || '';
@@ -51,16 +62,14 @@ Now convert this text to emojis only:`
     const emojisOnly = result.match(emojiRegex) || [];
     
     if (emojisOnly.length === 0) {
-      // Fallback: return some default emojis
       console.warn('No emojis found, using fallback');
-      return '😊✨🎉';
+      return '😊✨';
     }
 
     return emojisOnly.join('');
     
   } catch (error) {
     console.error('OpenRouter error:', error);
-    // Return fallback emojis instead of throwing error
-    return '😊✨🎉';
+    return '😊✨';
   }
 }
