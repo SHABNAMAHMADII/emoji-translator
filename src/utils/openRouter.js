@@ -13,31 +13,31 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'meta-llama/llama-3.2-3b-instruct:free',
+      model: 'google/gemini-2.0-flash-exp:free',
       messages: [
         {
           role: 'system',
-          content: `You are an emoji translator. Convert text to emojis.
+          content: `You are an emoji translator. Convert the following text to emojis.
 
-IMPORTANT RULES:
-1. ONLY return emojis. NO words, NO letters, NO numbers.
-2. Match the EXACT meaning of the text.
-3. Be specific — don't use generic emojis.
+RULES:
+- ONLY return emojis
+- NO words, NO letters, NO numbers
+- Match the meaning EXACTLY
 
 EXAMPLES:
-- "I love coding" → 💻❤️🔥
-- "It's sunny today" → ☀️🌤️🌞
-- "Good morning" → 🌅☀️🌞
-- "I'm tired" → 😴💤🥱
-- "Let's party" → 🎉🥳🍾
-- "I'm hungry" → 🍕😋🍔
-- "I'm studying" → 📚📖✏️
-- "I'm happy" → 😊🎉✨
+"good night" → 🌙😴💤
+"i love coding" → 💻❤️🔥
+"I'm feeling so grateful" → 🙏😊❤️
+"It's sunny today" → ☀️🌤️🌞
+"I'm tired" → 😴💤🥱
+"Let's party" → 🎉🥳🍾
+"Good morning" → 🌅☀️🌞
+"I'm hungry" → 🍕😋🍔
 
-Now convert this text to emojis only: "${text}"`
+Text: "${text}"`
         }
       ],
-      temperature: 0.6,
+      temperature: 0.5,
       max_tokens: 30,
     });
 
