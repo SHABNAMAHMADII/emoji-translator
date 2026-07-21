@@ -5,6 +5,7 @@ import TranslationResult from './components/TranslationResult';
 import HistoryItem from './components/HistoryItem';
 import EmptyState from './components/EmptyState';
 import HowItWorks from './components/HowItWorks';
+import EmojiStats from './components/EmojiStats';
 import { Clock } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
 
@@ -114,6 +115,9 @@ function App() {
           <EmptyState />
         )}
       </div>
+
+      {/* Emoji Statistics */}
+      <EmojiStats history={history} />
     </div>
   );
 }
