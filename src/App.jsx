@@ -69,6 +69,11 @@ function App() {
 
       <Header />
       
+      {/* How It Works - Above input on mobile/tablet, side on laptop */}
+      <div className="lg:hidden mb-8">
+        <HowItWorks />
+      </div>
+      
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-3">
           <TranslationForm onTranslate={handleTranslate} isLoading={isLoading} />
@@ -81,7 +86,8 @@ function App() {
           )}
         </div>
         
-        <div className="lg:col-span-2">
+        {/* How It Works - Side on laptop only */}
+        <div className="hidden lg:block lg:col-span-2">
           <div className="sticky top-6">
             <HowItWorks />
           </div>
