@@ -83,7 +83,7 @@ function TranslationForm({ onTranslate, isLoading }) {
           isLoading ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
-        🎲 Surprise Me!
+         Surprise Me!
       </button>
     </form>
   );
