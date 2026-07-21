@@ -13,28 +13,33 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-     model: 'openai/gpt-3.5-turbo',
+      model: 'openai/gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
-          content: `You are an emoji translator. Convert the following text to emojis.
+          content: `You are a precise emoji translator.
 
-RULES:
+Your task: Convert the given text into a short sequence of emojis that exactly represent the meaning.
+
+Rules:
 - ONLY return emojis
 - NO words, NO letters, NO numbers
-- Match the meaning EXACTLY
+- Match the meaning as closely as possible
+- Use 2–5 emojis
 
-EXAMPLES:
+Examples:
+"good morning" → 🌅☀️🌞
 "good night" → 🌙😴💤
 "i love coding" → 💻❤️🔥
-"I'm feeling so grateful" → 🙏😊❤️
-"It's sunny today" → ☀️🌤️🌞
 "I'm tired" → 😴💤🥱
 "Let's party" → 🎉🥳🍾
-"Good morning" → 🌅☀️🌞
 "I'm hungry" → 🍕😋🍔
+"It's sunny" → ☀️🌤️🌞
+"It's raining" → 🌧️☔💧
+"I'm happy" → 😊🎉✨
+"I'm sad" → 😢💔🥀
 
-Text: "${text}"`
+Now convert this text to emojis only: "${text}"`
         }
       ],
       temperature: 0.5,
