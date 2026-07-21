@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { getEmojisForText } from './emojiMap';
 
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
@@ -11,35 +12,35 @@ const openai = new OpenAI({
 });
 
 export async function translateToEmojis(text) {
+  // Step 1: Try manual mapping first (100% reliable)
+  const manualEmojis = getEmojisForText(text);
+  if (manualEmojis && manualEmojis.length > 0) {
+    console.log('✅ Using manual emoji mapping:', manualEmojis);
+    return manualEmojis.join('');
+  }
+
+  // Step 2: Fallback to AI if manual mapping fails
   try {
     const completion = await openai.chat.completions.create({
-     model: 'google/gemini-2.0-flash-exp:free',
+      model: 'google/gemini-2.0-flash-exp:free',
       messages: [
         {
           role: 'system',
-          content: `You are a precise emoji translator.
+          content: `You are an emoji translator. Convert the following text to emojis only.
 
-Your task: Convert the given text into a short sequence of emojis that exactly represent the meaning.
-
-Rules:
+RULES:
 - ONLY return emojis
 - NO words, NO letters, NO numbers
-- Match the meaning as closely as possible
-- Use 2–5 emojis
+- Match the meaning exactly
 
-Examples:
+EXAMPLES:
 "good morning" → 🌅☀️🌞
 "good night" → 🌙😴💤
 "i love coding" → 💻❤️🔥
-"I'm tired" → 😴💤🥱
-"Let's party" → 🎉🥳🍾
-"I'm hungry" → 🍕😋🍔
-"It's sunny" → ☀️🌤️🌞
-"It's raining" → 🌧️☔💧
-"I'm happy" → 😊🎉✨
-"I'm sad" → 😢💔🥀
+"I'm feeling so grateful" → 🙏😊❤️
+"It's sunny today" → ☀️🌤️🌞
 
-Now convert this text to emojis only: "${text}"`
+Text: "${text}"`
         }
       ],
       temperature: 0.5,
