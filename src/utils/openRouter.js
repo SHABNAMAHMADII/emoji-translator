@@ -17,41 +17,41 @@ export async function translateToEmojis(text) {
       messages: [
         {
           role: 'system',
-          content: `You are a creative emoji translator. Your ONLY job is to convert text into a short sequence of emojis that accurately represent the meaning.
+          content: `You are a precise emoji translator. Convert the following text into a short sequence of emojis that EXACTLY match the meaning.
 
 STRICT RULES:
 - ONLY return emojis
-- NEVER use letters, numbers, spaces, or punctuation
-- NEVER explain what you're doing
-- NEVER say anything in words
-- JUST emojis, nothing else
+- NEVER use letters, numbers, or words
+- NEVER add extra text or explanations
+- Use 2-5 emojis that best represent the sentence
 
-GUIDELINES:
-- Match the exact meaning of the sentence
-- Use specific, relevant emojis (not generic ones)
-- Use 2-6 emojis depending on the message length
+IMPORTANT GUIDELINES:
+- Match the exact meaning of each word
+- Use specific, relevant emojis
+- Be creative but accurate
 
 EXAMPLES:
-Input: "It's sunny today"
-Output: ☀️🌤️🌞
+"It's sunny today" → ☀️🌤️🌞
+"It's raining outside" → 🌧️☔💧
+"I love coding" → 💻❤️🔥
+"I'm so happy" → 😊🎉✨
+"I'm tired" → 😴💤🥱
+"Let's go to the beach" → 🏖️🌊🌴
+"Good morning" → 🌅☀️🌞
+"Good night" → 🌙😴💤
+"I'm hungry" → 🍕😋🍔
+"I'm studying" → 📚📖✏️
 
-Input: "I love coding"
-Output: 💻❤️🔥
-
-Input: "I'm so happy"
-Output: 😊🎉✨
-
-Input: "Let's go to the beach"
-Output: 🏖️🌊🌴
-
-Now convert this text to emojis only:`
+Now convert this text to emojis only:
+Input: "${text}"
+Output:`
         },
         {
           role: 'user',
           content: text
         }
       ],
-      temperature: 0.8,
+      temperature: 0.7,
       max_tokens: 60,
     });
 
