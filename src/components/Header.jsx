@@ -8,7 +8,7 @@ function Header() {
         <span className="text-teal dark:text-[#00d2d3]">Translator</span>
       </h1>
       <p className="text-gray-500 dark:text-gray-400 text-base sm:text-lg font-medium">
-        Turn words into emojis. 🎉 No letters allowed.
+       The art of expressing without words
       </p>
     </header>
   );
