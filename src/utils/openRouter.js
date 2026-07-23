@@ -12,14 +12,13 @@ const openai = new OpenAI({
 });
 
 export async function translateToEmojis(text) {
-  // Step 1: Try manual mapping first (100% reliable)
+  // Step 1: Try manual mapping first
   const manualEmojis = getEmojisForText(text);
   if (manualEmojis && manualEmojis.length > 0) {
-    console.log('✅ Using manual emoji mapping:', manualEmojis);
     return manualEmojis.join('');
   }
 
-  // Step 2: Fallback to AI if manual mapping fails
+  // Step 2: Fallback to AI
   try {
     const completion = await openai.chat.completions.create({
       model: 'google/gemini-2.0-flash-exp:free',
@@ -37,24 +36,23 @@ EXAMPLES:
 "good morning" → 🌅☀️🌞
 "good night" → 🌙😴💤
 "i love coding" → 💻❤️🔥
-"I'm feeling so grateful" → 🙏😊❤️
+"I'm tired" → 😴💤🥱
+"Let's party" → 🎉🥳🍾
 "It's sunny today" → ☀️🌤️🌞
 
 Text: "${text}"`
         }
       ],
-      temperature: 0.5,
+      temperature: 0.6,
       max_tokens: 30,
     });
 
     let result = completion.choices[0]?.message?.content?.trim() || '';
 
-    // Remove any non-emoji characters
     const emojiRegex = /[\p{Emoji}]/gu;
     const emojisOnly = result.match(emojiRegex) || [];
     
     if (emojisOnly.length === 0) {
-      console.warn('No emojis found, using fallback');
       return '😊✨';
     }
 
