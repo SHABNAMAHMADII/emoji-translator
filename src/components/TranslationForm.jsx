@@ -4,33 +4,12 @@ import { Send } from 'lucide-react';
 function TranslationForm({ onTranslate, isLoading }) {
   const [text, setText] = useState('');
 
-  const surpriseMessages = [
-    "I am so happy today!",
-    "Let's party tonight!",
-    "I love coding!",
-    "This is amazing!",
-    "What a wonderful day!",
-    "I'm feeling so grateful!",
-    "Life is beautiful!",
-    "I can't wait for the weekend!",
-    "You are awesome!",
-    "Today is a great day!"
-  ];
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (text.trim() && !isLoading) {
       const textToTranslate = text.trim();
       setText('');
       await onTranslate(textToTranslate);
-    }
-  };
-
-  const handleSurprise = () => {
-    if (!isLoading) {
-      const random = surpriseMessages[Math.floor(Math.random() * surpriseMessages.length)];
-      setText(random);
-      onTranslate(random);
     }
   };
 
@@ -73,17 +52,6 @@ function TranslationForm({ onTranslate, isLoading }) {
             <Send size={18} />
           </>
         )}
-      </button>
-
-      <button
-        type="button"
-        onClick={handleSurprise}
-        disabled={isLoading}
-        className={`w-full mt-3 text-teal dark:text-[#00d2d3] hover:text-coral dark:hover:text-[#e94560] transition-colors font-semibold text-sm ${
-          isLoading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-      >
-         Surprise Me!
       </button>
     </form>
   );
