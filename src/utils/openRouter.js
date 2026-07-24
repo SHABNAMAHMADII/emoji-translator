@@ -13,20 +13,20 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'openai/gpt-4o-mini',  // ← THIS WILL WORK
+      model: 'nvidia/llama-nemotron-embed-vl-1b-v2:free',
       messages: [
         {
           role: 'system',
           content: `You are an emoji translator. Convert text to emojis only.
 
-STRICT RULES:
+RULES:
 - ONLY return emojis
 - NO words, NO letters, NO numbers
 - Use 2-5 emojis
 
 EXAMPLES:
-"i am sad today" → 😢💔🥀
-"i am happy today" → 😊🎉✨
+"i am sad" → 😢💔🥀
+"i am happy" → 😊🎉✨
 "call me later" → 📞⏰📱
 "you look beautiful" → 😍✨💕
 
