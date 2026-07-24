@@ -13,51 +13,50 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-     model: 'google/gemini-2.0-flash-exp:free',
+      model: 'openrouter/free',
       messages: [
         {
           role: 'system',
-          content: `You are an emoji translator. You convert English sentences into a sequence of emojis that represent the meaning.
+          content: `You are an emoji translator. Your ONLY task is to convert English text into a sequence of emojis.
 
-RULES (FIXED):
+RULES:
 - ONLY return emojis
-- NEVER use letters, numbers, or words
-- NEVER explain anything
+- NO words, NO letters, NO numbers
+- NO explanations
 - Use 2-5 emojis
 
-EXAMPLES OF EXACT TRANSLATIONS:
+EXAMPLES:
 "call me later" → 📞⏰📱
-"i am so happy" → 😊😍🎉
+"i am so happy" → 😊🎉✨
 "today is so hot" → 🔥🌞🥵
 "you look beautiful" → 😍✨💕
 "good morning" → 🌅☀️🌞
 "good night" → 🌙😴💤
-"i love you" → ❤️😍💕
-"let's go out" → 🚶‍♀️🌳✨
+"i love coding" → 💻❤️🔥
+"let's party" → 🎉🥳🍾
 "i'm tired" → 😴💤🥱
 "i'm hungry" → 🍕😋🍔
-"i'm bored" → 🥱😑💤
 
-Now convert this text into emojis only. NO WORDS. NO LETTERS. NO NUMBERS. ONLY EMOJIS.
-
-Text: "${text}"`
+Now convert this text to emojis only: "${text}"`
         }
       ],
-      temperature: 0.5,
+      temperature: 0.3,
       max_tokens: 30,
     });
 
-    const result = completion.choices[0]?.message?.content?.trim() || '';
+    let result = completion.choices[0]?.message?.content?.trim() || '';
 
     // Extract only emojis
     const emojiRegex = /[\p{Emoji}]/gu;
     const emojisOnly = result.match(emojiRegex) || [];
 
     if (emojisOnly.length === 0) {
+      // Fallback if no emojis found
       return '😊✨';
     }
 
     return emojisOnly.join('');
+    
   } catch (error) {
     console.error('OpenRouter error:', error);
     return '😊✨';
