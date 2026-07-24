@@ -10,45 +10,90 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-export async function translateToEmojis(text) {
-  try {
-    const completion = await openai.chat.completions.create({
-      model: 'google/gemini-2.0-flash-exp:free',
-      messages: [
-        {
-          role: 'system',
-          content: `You are an emoji translator. Convert text to emojis only.
+// Only free models that actually work for chat
+const MODELS = [
+  'google/gemini-2.0-flash-exp:free',
+  'meta-llama/llama-3.1-8b-instruct:free',
+  'microsoft/phi-3-mini-128k-instruct:free',
+];
+
+// Matches all emojis (including flags, families, skin tones)
+const EMOJI_REGEX = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})(\u200d(\p{Emoji_Presentation}|\p{Extended_Pictographic}))*|\p{Regional_Indicator}{2}/gu;
+
+const SYSTEM_PROMPT = `You are an emoji translator. Convert the user's text into emojis only.
 
 RULES:
-- ONLY return emojis
-- NO words, NO letters, NO numbers
-- Use 2-5 emojis
+- Output ONLY emojis, nothing else
+- NO words, letters, numbers, or punctuation
+- Use 2-5 emojis that capture the meaning
 
 EXAMPLES:
 "i am sad" → 😢💔🥀
 "i am happy" → 😊🎉✨
-"call me later" → 📞⏰📱
-"you look beautiful" → 😍✨💕
+"call me later" → 📞⏰📱`;
 
-Text: "${text}"`
-        }
-      ],
-      temperature: 0.3,
-      max_tokens: 30,
-    });
+async function tryModel(model, text) {
+  const completion = await openai.chat.completions.create({
+    model,
+    messages: [
+      { role: 'system', content: SYSTEM_PROMPT },
+      { role: 'user', content: text },
+    ],
+    temperature: 0.3,
+    max_tokens: 30,
+  });
 
-    let result = completion.choices[0]?.message?.content?.trim() || '';
-    const emojiRegex = /[\p{Emoji}]/gu;
-    const emojisOnly = result.match(emojiRegex) || [];
+  const raw = completion.choices[0]?.message?.content?.trim() || '';
+  const emojis = raw.match(EMOJI_REGEX) || [];
+  return emojis.join('');
+}
 
-    if (emojisOnly.length === 0) {
-      return '😊✨';
+export async function translateToEmojis(text) {
+  if (!text?.trim()) return '';
+
+  for (const model of MODELS) {
+    try {
+      const result = await tryModel(model, text);
+      if (result.length > 0) {
+        console.log(`✅ ${model} succeeded`);
+        return result;
+      }
+    } catch (error) {
+      console.warn(`⚠️ ${model} failed:`, error.message);
     }
-
-    return emojisOnly.join('');
-    
-  } catch (error) {
-    console.error('OpenRouter error:', error);
-    return '😊✨';
   }
+
+  // If all AI models fail, use a simple fallback map
+  console.warn('All AI models failed. Using fallback map.');
+  return getFallbackEmojis(text);
+}
+
+// 🔥 FALLBACK: Manual emoji map (NO AI, 100% reliable)
+function getFallbackEmojis(text) {
+  const lower = text.toLowerCase();
+  const map = {
+    happy: ['😊', '🎉', '✨'],
+    sad: ['😢', '💔', '🥀'],
+    love: ['❤️', '😍', '💕'],
+    beautiful: ['😍', '✨', '💕'],
+    pretty: ['😍', '✨', '💕'],
+    hot: ['🔥', '🌞', '🥵'],
+    cold: ['❄️', '🥶', '🧊'],
+    call: ['📞', '⏰', '📱'],
+    later: ['⏰', '🕐', '⌛'],
+    morning: ['🌅', '☀️', '🌞'],
+    night: ['🌙', '😴', '💤'],
+    coding: ['💻', '❤️', '🔥'],
+    tired: ['😴', '💤', '🥱'],
+    hungry: ['🍕', '😋', '🍔'],
+    party: ['🎉', '🥳', '🍾'],
+  };
+
+  for (const [key, emojis] of Object.entries(map)) {
+    if (lower.includes(key)) {
+      return emojis.join('');
+    }
+  }
+
+  return '😊✨';
 }
