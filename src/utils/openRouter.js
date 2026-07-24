@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { getEmojisForText } from './emojiMap';
 
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
@@ -11,9 +12,10 @@ const openai = new OpenAI({
 });
 
 export async function translateToEmojis(text) {
+  // Try AI first
   try {
     const completion = await openai.chat.completions.create({
-      model: 'openai/gpt-3.5-turbo',  // ← USE THIS
+      model: 'openai/gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
@@ -25,9 +27,9 @@ RULES:
 - Use 2-5 emojis
 
 EXAMPLES:
+"i am sad today" → 😢💔🥀
+"i am happy today" → 😊🎉✨
 "call me later" → 📞⏰📱
-"i am so sad" → 😢💔🥀
-"i am so happy" → 😊🎉✨
 "today is so hot" → 🔥🌞🥵
 "you look beautiful" → 😍✨💕
 
@@ -42,14 +44,28 @@ Text: "${text}"`
     const emojiRegex = /[\p{Emoji}]/gu;
     const emojisOnly = result.match(emojiRegex) || [];
 
-    if (emojisOnly.length === 0) {
-      return '😊✨';
+    if (emojisOnly.length > 0) {
+      // AI gave us emojis, check if they make sense
+      const aiEmojis = emojisOnly.join('');
+      const manualEmojis = getEmojisForText(text);
+      
+      // If manual map has better emojis, use those
+      if (manualEmojis && manualEmojis.length > 0 && manualEmojis.join('') !== aiEmojis) {
+        console.log('🔍 Using manual fallback for:', text);
+        return manualEmojis.join('');
+      }
+      
+      return aiEmojis;
     }
 
-    return emojisOnly.join('');
+    // Fallback to manual if AI returned nothing
+    const manualEmojis = getEmojisForText(text);
+    return manualEmojis.join('');
     
   } catch (error) {
-    console.error('OpenRouter error:', error);
-    return '😊✨';
+    // If AI fails, use manual map
+    console.error('OpenRouter error, using manual fallback:', error);
+    const manualEmojis = getEmojisForText(text);
+    return manualEmojis.join('');
   }
 }
