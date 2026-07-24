@@ -13,7 +13,7 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'nvidia/nemotron-3-ultra-550b-a55b:free',
+     model: 'openai/gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
