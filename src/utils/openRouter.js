@@ -13,7 +13,7 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-     model: 'openai/gpt-3.5-turbo',
+      model: 'openai/gpt-3.5-turbo',  // ← USE THIS
       messages: [
         {
           role: 'system',
@@ -26,12 +26,10 @@ RULES:
 
 EXAMPLES:
 "call me later" → 📞⏰📱
+"i am so sad" → 😢💔🥀
 "i am so happy" → 😊🎉✨
 "today is so hot" → 🔥🌞🥵
 "you look beautiful" → 😍✨💕
-"good morning" → 🌅☀️🌞
-"good night" → 🌙😴💤
-"i love coding" → 💻❤️🔥
 
 Text: "${text}"`
         }
@@ -41,8 +39,6 @@ Text: "${text}"`
     });
 
     let result = completion.choices[0]?.message?.content?.trim() || '';
-
-    // Extract only emojis
     const emojiRegex = /[\p{Emoji}]/gu;
     const emojisOnly = result.match(emojiRegex) || [];
 
