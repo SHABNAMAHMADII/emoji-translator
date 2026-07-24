@@ -11,25 +11,23 @@ const openai = new OpenAI({
 });
 
 const MODELS = [
-  'google/gemini-2.0-flash-exp:free',
-  'meta-llama/llama-3.1-8b-instruct:free',
-  'microsoft/phi-3-mini-128k-instruct:free',
+  'nvidia/nemotron-3-ultra-550b-a55b:free',
+  'poolside/laguna-s-2.1:free',
 ];
 
-const SYSTEM_PROMPT = `You are an emoji translator. Convert the user's text into emojis only.
+const SYSTEM_PROMPT = `You are an emoji translator. Convert text to emojis only.
 
 RULES:
-- Output ONLY emojis, nothing else
-- NO words, letters, numbers, or punctuation
-- Use 2-5 emojis that capture the meaning
+- ONLY return emojis
+- NO words, NO letters, NO numbers
+- Use 2-5 emojis
 
 EXAMPLES:
-"i am sad" → 😢💔🥀
+"hi" → 👋😊
+"hey bestie" → 👋💕✨
+"it is so hot today" → 🔥🌞🥵
 "i am happy" → 😊🎉✨
-"call me later" → 📞⏰📱
-"she is so cool" → 😎🔥✨
-"it is hot today" → 🔥🌞🥵
-"I am beautiful" → 😍✨💕`;
+"i am sad" → 😢💔🥀`;
 
 async function tryModel(model, text) {
   const completion = await openai.chat.completions.create({
@@ -53,56 +51,49 @@ export async function translateToEmojis(text) {
 
   console.log('🔍 Translating:', text);
 
-  // Try AI models first
   for (const model of MODELS) {
     try {
-      console.log(`⏳ Trying model: ${model}`);
+      console.log(`⏳ Trying: ${model}`);
       const result = await tryModel(model, text);
       if (result.length > 0) {
-        console.log(`✅ ${model} succeeded:`, result);
+        console.log(`✅ Success:`, result);
         return result;
-      } else {
-        console.warn(`⚠️ ${model} returned no emojis`);
       }
     } catch (error) {
       console.warn(`⚠️ ${model} failed:`, error.message);
     }
   }
 
-  console.warn('⚠️ All AI models failed. Using fallback map.');
-  const fallback = getFallbackEmojis(text);
-  console.log('🔁 Fallback result:', fallback);
-  return fallback;
+  console.warn('⚠️ All AI models failed. Using fallback.');
+  return getFallbackEmojis(text);
 }
 
 function getFallbackEmojis(text) {
   const lower = text.toLowerCase();
 
   const map = {
+    hi: ['👋', '😊'],
+    hey: ['👋', '💕', '✨'],
+    hello: ['👋', '😊'],
     happy: ['😊', '🎉', '✨'],
     sad: ['😢', '💔', '🥀'],
-    love: ['❤️', '😍', '💕'],
-    beautiful: ['😍', '✨', '💕'],
-    pretty: ['😍', '✨', '💕'],
-    cool: ['😎', '🔥', '✨'],
     hot: ['🔥', '🌞', '🥵'],
     cold: ['❄️', '🥶', '🧊'],
+    love: ['❤️', '😍', '💕'],
+    beautiful: ['😍', '✨', '💕'],
+    cool: ['😎', '🔥', '✨'],
     call: ['📞', '⏰', '📱'],
-    later: ['⏰', '🕐', '⌛'],
     morning: ['🌅', '☀️', '🌞'],
     night: ['🌙', '😴', '💤'],
     coding: ['💻', '❤️', '🔥'],
     tired: ['😴', '💤', '🥱'],
     hungry: ['🍕', '😋', '🍔'],
     party: ['🎉', '🥳', '🍾'],
-    grateful: ['🙏', '😊', '❤️'],
-    excited: ['🤩', '🎉', '✨'],
-    angry: ['😡', '💢', '🔥'],
-    scared: ['😨', '😱', '💀'],
   };
 
   for (const [key, emojis] of Object.entries(map)) {
     if (lower.includes(key)) {
+      console.log(`✅ Fallback: "${key}" → ${emojis.join('')}`);
       return emojis.join('');
     }
   }
