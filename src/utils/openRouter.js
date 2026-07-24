@@ -10,15 +10,11 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-// Only free models that actually work for chat
 const MODELS = [
   'google/gemini-2.0-flash-exp:free',
   'meta-llama/llama-3.1-8b-instruct:free',
   'microsoft/phi-3-mini-128k-instruct:free',
 ];
-
-// Matches all emojis (including flags, families, skin tones)
-const EMOJI_REGEX = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})(\u200d(\p{Emoji_Presentation}|\p{Extended_Pictographic}))*|\p{Regional_Indicator}{2}/gu;
 
 const SYSTEM_PROMPT = `You are an emoji translator. Convert the user's text into emojis only.
 
@@ -30,7 +26,10 @@ RULES:
 EXAMPLES:
 "i am sad" → 😢💔🥀
 "i am happy" → 😊🎉✨
-"call me later" → 📞⏰📱`;
+"call me later" → 📞⏰📱
+"she is so cool" → 😎🔥✨
+"it is hot today" → 🔥🌞🥵
+"I am beautiful" → 😍✨💕`;
 
 async function tryModel(model, text) {
   const completion = await openai.chat.completions.create({
@@ -44,39 +43,48 @@ async function tryModel(model, text) {
   });
 
   const raw = completion.choices[0]?.message?.content?.trim() || '';
-  const emojis = raw.match(EMOJI_REGEX) || [];
+  const emojiRegex = /[\p{Emoji}]/gu;
+  const emojis = raw.match(emojiRegex) || [];
   return emojis.join('');
 }
 
 export async function translateToEmojis(text) {
   if (!text?.trim()) return '';
 
+  console.log('🔍 Translating:', text);
+
+  // Try AI models first
   for (const model of MODELS) {
     try {
+      console.log(`⏳ Trying model: ${model}`);
       const result = await tryModel(model, text);
       if (result.length > 0) {
-        console.log(`✅ ${model} succeeded`);
+        console.log(`✅ ${model} succeeded:`, result);
         return result;
+      } else {
+        console.warn(`⚠️ ${model} returned no emojis`);
       }
     } catch (error) {
       console.warn(`⚠️ ${model} failed:`, error.message);
     }
   }
 
-  // If all AI models fail, use a simple fallback map
-  console.warn('All AI models failed. Using fallback map.');
-  return getFallbackEmojis(text);
+  console.warn('⚠️ All AI models failed. Using fallback map.');
+  const fallback = getFallbackEmojis(text);
+  console.log('🔁 Fallback result:', fallback);
+  return fallback;
 }
 
-// 🔥 FALLBACK: Manual emoji map (NO AI, 100% reliable)
 function getFallbackEmojis(text) {
   const lower = text.toLowerCase();
+
   const map = {
     happy: ['😊', '🎉', '✨'],
     sad: ['😢', '💔', '🥀'],
     love: ['❤️', '😍', '💕'],
     beautiful: ['😍', '✨', '💕'],
     pretty: ['😍', '✨', '💕'],
+    cool: ['😎', '🔥', '✨'],
     hot: ['🔥', '🌞', '🥵'],
     cold: ['❄️', '🥶', '🧊'],
     call: ['📞', '⏰', '📱'],
@@ -87,6 +95,10 @@ function getFallbackEmojis(text) {
     tired: ['😴', '💤', '🥱'],
     hungry: ['🍕', '😋', '🍔'],
     party: ['🎉', '🥳', '🍾'],
+    grateful: ['🙏', '😊', '❤️'],
+    excited: ['🤩', '🎉', '✨'],
+    angry: ['😡', '💢', '🔥'],
+    scared: ['😨', '😱', '💀'],
   };
 
   for (const [key, emojis] of Object.entries(map)) {
