@@ -11,23 +11,23 @@ const openai = new OpenAI({
 });
 
 const MODELS = [
+  'google/gemini-2.0-flash-lite-preview-02-05:free',
   'nvidia/nemotron-3-ultra-550b-a55b:free',
   'poolside/laguna-s-2.1:free',
 ];
 
-const SYSTEM_PROMPT = `You are an emoji translator. Convert text to emojis only.
+const SYSTEM_PROMPT = `Translate to emojis. Only emojis. No words.
 
-RULES:
-- ONLY return emojis
-- NO words, NO letters, NO numbers
-- Use 2-5 emojis
-
-EXAMPLES:
-"hi" → 👋😊
-"hey bestie" → 👋💕✨
-"it is so hot today" → 🔥🌞🥵
+Examples:
+"good morning" → 🌅☀️🌞
+"good night" → 🌙😴💤
+"i love coding" → 💻❤️🔥
 "i am happy" → 😊🎉✨
-"i am sad" → 😢💔🥀`;
+"i am sad" → 😢💔🥀
+"it is raining" → 🌧️☔💧
+"sunny day" → ☀️🌤️🌞
+
+Now translate this:`;
 
 async function tryModel(model, text) {
   const completion = await openai.chat.completions.create({
@@ -36,8 +36,8 @@ async function tryModel(model, text) {
       { role: 'system', content: SYSTEM_PROMPT },
       { role: 'user', content: text },
     ],
-    temperature: 0.3,
-    max_tokens: 30,
+    temperature: 0.1,
+    max_tokens: 20,
   });
 
   const raw = completion.choices[0]?.message?.content?.trim() || '';
@@ -51,6 +51,7 @@ export async function translateToEmojis(text) {
 
   console.log('🔍 Translating:', text);
 
+  // Try AI models first
   for (const model of MODELS) {
     try {
       console.log(`⏳ Trying: ${model}`);
@@ -64,6 +65,7 @@ export async function translateToEmojis(text) {
     }
   }
 
+  // Fallback map (if all AI models fail)
   console.warn('⚠️ All AI models failed. Using fallback.');
   return getFallbackEmojis(text);
 }
@@ -72,19 +74,31 @@ function getFallbackEmojis(text) {
   const lower = text.toLowerCase();
 
   const map = {
+    // 👋 GREETINGS
     hi: ['👋', '😊'],
     hey: ['👋', '💕', '✨'],
     hello: ['👋', '😊'],
+    'good morning': ['🌅', '☀️', '🌞'],
+    morning: ['🌅', '☀️', '🌞'],
+    'good night': ['🌙', '😴', '💤'],
+    night: ['🌙', '😴', '💤'],
+
+    // 😊 EMOTIONS
     happy: ['😊', '🎉', '✨'],
     sad: ['😢', '💔', '🥀'],
-    hot: ['🔥', '🌞', '🥵'],
-    cold: ['❄️', '🥶', '🧊'],
     love: ['❤️', '😍', '💕'],
     beautiful: ['😍', '✨', '💕'],
     cool: ['😎', '🔥', '✨'],
+
+    // 🌤️ WEATHER
+    hot: ['🔥', '🌞', '🥵'],
+    cold: ['❄️', '🥶', '🧊'],
+    raining: ['🌧️', '☔', '💧'],
+    rain: ['🌧️', '☔', '💧'],
+    sunny: ['☀️', '🌤️', '🌞'],
+
+    // 📞 ACTIVITIES
     call: ['📞', '⏰', '📱'],
-    morning: ['🌅', '☀️', '🌞'],
-    night: ['🌙', '😴', '💤'],
     coding: ['💻', '❤️', '🔥'],
     tired: ['😴', '💤', '🥱'],
     hungry: ['🍕', '😋', '🍔'],
