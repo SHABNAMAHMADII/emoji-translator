@@ -13,16 +13,15 @@ const openai = new OpenAI({
 export async function translateToEmojis(text) {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'openrouter/free',
+      model: 'nvidia/nemotron-3-ultra-550b-a55b:free',
       messages: [
         {
           role: 'system',
-          content: `You are an emoji translator. Your ONLY task is to convert English text into a sequence of emojis.
+          content: `You are an emoji translator. Convert text to emojis only.
 
 RULES:
 - ONLY return emojis
 - NO words, NO letters, NO numbers
-- NO explanations
 - Use 2-5 emojis
 
 EXAMPLES:
@@ -33,11 +32,8 @@ EXAMPLES:
 "good morning" → 🌅☀️🌞
 "good night" → 🌙😴💤
 "i love coding" → 💻❤️🔥
-"let's party" → 🎉🥳🍾
-"i'm tired" → 😴💤🥱
-"i'm hungry" → 🍕😋🍔
 
-Now convert this text to emojis only: "${text}"`
+Text: "${text}"`
         }
       ],
       temperature: 0.3,
@@ -51,7 +47,6 @@ Now convert this text to emojis only: "${text}"`
     const emojisOnly = result.match(emojiRegex) || [];
 
     if (emojisOnly.length === 0) {
-      // Fallback if no emojis found
       return '😊✨';
     }
 
