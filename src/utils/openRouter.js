@@ -17,49 +17,47 @@ export async function translateToEmojis(text) {
       messages: [
         {
           role: 'system',
-          content: `You are an emoji translator. Your ONLY job is to convert text to emojis.
+          content: `You are an emoji translator. You convert English sentences into a sequence of emojis that represent the meaning.
 
-STRICT RULES:
+RULES (FIXED):
 - ONLY return emojis
 - NEVER use letters, numbers, or words
 - NEVER explain anything
-- NEVER say what you're doing
-- JUST emojis, nothing else
+- Use 2-5 emojis
 
-EXAMPLES:
-Input: "I am so happy today"
-Output: 😊😍🎉✨
+EXAMPLES OF EXACT TRANSLATIONS:
+"call me later" → 📞⏰📱
+"i am so happy" → 😊😍🎉
+"today is so hot" → 🔥🌞🥵
+"you look beautiful" → 😍✨💕
+"good morning" → 🌅☀️🌞
+"good night" → 🌙😴💤
+"i love you" → ❤️😍💕
+"let's go out" → 🚶‍♀️🌳✨
+"i'm tired" → 😴💤🥱
+"i'm hungry" → 🍕😋🍔
+"i'm bored" → 🥱😑💤
 
-Input: "I love coding"
-Output: ❤️💻🔥
+Now convert this text into emojis only. NO WORDS. NO LETTERS. NO NUMBERS. ONLY EMOJIS.
 
-Input: "Good morning"
-Output: 🌅☀️🌞
-
-Now convert this text to emojis only. Do NOT add any text, explanations, or extra characters. ONLY EMOJIS.`
-        },
-        {
-          role: 'user',
-          content: text
+Text: "${text}"`
         }
       ],
-      temperature: 0.7,
-      max_tokens: 50,
+      temperature: 0.5,
+      max_tokens: 30,
     });
 
     const result = completion.choices[0]?.message?.content?.trim() || '';
 
-    // Remove any non-emoji characters
+    // Extract only emojis
     const emojiRegex = /[\p{Emoji}]/gu;
     const emojisOnly = result.match(emojiRegex) || [];
-    
+
     if (emojisOnly.length === 0) {
-      // Fallback if no emojis found
       return '😊✨';
     }
 
     return emojisOnly.join('');
-    
   } catch (error) {
     console.error('OpenRouter error:', error);
     return '😊✨';
