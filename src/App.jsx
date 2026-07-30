@@ -62,7 +62,7 @@ function App() {
   };
 
   const handleClearAll = () => {
-    if (window.confirm('Delete all translations? 😢')) {
+    if (window.confirm('Delete all translations?')) {
       setHistory([]);
     }
   };
@@ -76,68 +76,76 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen max-w-4xl mx-auto px-4 py-6 sm:py-10 transition-colors duration-300">
+    <div className="min-h-screen bg-cream dark:bg-[#1a1a2e] transition-colors duration-300">
+      {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 text-2xl"
+        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 text-2xl"
         aria-label="Toggle dark mode"
       >
         {darkMode ? '☀️' : '🌙'}
       </button>
 
-      <Header />
-      
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <div className="lg:col-span-3">
-          <TranslationForm onTranslate={handleTranslate} isLoading={isLoading} />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        <Header />
+        
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
+          {/* Left Column: Translation Form & Results */}
+          <div className="lg:col-span-3 space-y-6">
+            <TranslationForm onTranslate={handleTranslate} isLoading={isLoading} />
+            
+            {currentTranslation && (
+              <TranslationResult 
+                result={currentTranslation.emojiText} 
+                originalText={currentTranslation.originalText}
+              />
+            )}
+          </div>
           
-          {currentTranslation && (
-            <TranslationResult 
-              result={currentTranslation.emojiText} 
-              originalText={currentTranslation.originalText}
-            />
+          {/* Right Column: How It Works */}
+          <div className="lg:col-span-2">
+            <div className="sticky top-6">
+              <HowItWorks />
+            </div>
+          </div>
+        </div>
+
+        {/* History Section */}
+        <div className="mt-10">
+          {history.length > 0 ? (
+            <div className="bg-white dark:bg-[#16213e] rounded-2xl shadow-md p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                  <Clock size={22} /> History
+                  <span className="text-sm font-normal text-gray-400">({history.length})</span>
+                </h2>
+                {history.length > 1 && (
+                  <button
+                    onClick={handleClearAll}
+                    className="text-sm text-red-400 hover:text-red-600 dark:hover:text-red-300 transition-colors font-semibold px-3 py-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                  >
+                    Clear all
+                  </button>
+                )}
+              </div>
+              <div className="space-y-3 max-h-96 overflow-y-auto pr-1 custom-scrollbar">
+                {history.map((item) => (
+                  <HistoryItem key={item.id} item={item} onDelete={handleDelete} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <EmptyState />
           )}
         </div>
+
+        {/* Emoji Statistics */}
+        <EmojiStats history={history} />
         
-        <div className="lg:col-span-2">
-          <div className="sticky top-6">
-            <HowItWorks />
-          </div>
-        </div>
+        {/* Reverse Translate */}
+        <ReverseTranslate />
       </div>
-
-      <div className="mt-12">
-        {history.length > 0 ? (
-          <div>
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl sm:text-2xl font-bold text-charcoal dark:text-white flex items-center gap-2">
-                <Clock size={24} /> History
-                <span className="text-sm font-normal text-gray-400">({history.length})</span>
-              </h2>
-              {history.length > 1 && (
-                <button
-                  onClick={handleClearAll}
-                  className="text-sm text-red-400 hover:text-red-600 dark:hover:text-red-300 transition-colors font-semibold px-3 py-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                >
-                  Clear all
-                </button>
-              )}
-            </div>
-            <div className="space-y-3 max-h-96 overflow-y-auto pr-1 custom-scrollbar">
-              {history.map((item) => (
-                <HistoryItem key={item.id} item={item} onDelete={handleDelete} />
-              ))}
-            </div>
-          </div>
-        ) : (
-          <EmptyState />
-        )}
-      </div>
-
-      <EmojiStats history={history} />
-      
-      {/* Reverse Translate */}
-      <ReverseTranslate />
     </div>
   );
 }
