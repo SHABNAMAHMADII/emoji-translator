@@ -193,3 +193,118 @@ html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
 html.dark .bg-white.dark\:bg-gray-800 {
   background-color: #1a1a2e !important;
 }
+
+/* ========================================
+   DARK MODE CONTRAST FIXES
+   ======================================== */
+
+html.dark .text-gray-800 {
+  color: #e5e7eb !important;
+}
+
+html.dark .text-gray-700 {
+  color: #d1d5db !important;
+}
+
+html.dark .text-gray-600 {
+  color: #9ca3af !important;
+}
+
+html.dark .text-gray-500 {
+  color: #9ca3af !important;
+}
+
+html.dark .text-gray-400 {
+  color: #6b7280 !important;
+}
+
+html.dark .text-slate-600 {
+  color: #9ca3af !important;
+}
+
+html.dark .text-slate-500 {
+  color: #9ca3af !important;
+}
+
+html.dark .text-slate-400 {
+  color: #6b7280 !important;
+}
+
+html.dark .bg-white {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-gray-50 {
+  background-color: #0f172a !important;
+}
+
+html.dark .border-gray-200 {
+  border-color: #334155 !important;
+}
+
+html.dark .border-gray-100 {
+  border-color: #1e293b !important;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark .font-bold {
+  color: #f1f5f9 !important;
+}
+
+html.dark p,
+html.dark .text-charcoal {
+  color: #cbd5e1 !important;
+}
+
+html.dark .bg-white.rounded-2xl {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+html.dark .bg-white.rounded-2xl .text-gray-800 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .bg-white.rounded-2xl .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .bg-white.rounded-2xl .border-gray-100 {
+  border-color: #334155 !important;
+}
+
+html.dark .bg-white.rounded-2xl.shadow-md {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+html.dark .bg-white.rounded-2xl.shadow-md .text-gray-800 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .bg-white.rounded-2xl.shadow-md .text-gray-400 {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-gray-400 {
+  color: #64748b !important;
+}
+
+html.dark .bg-gray-50 {
+  background-color: #0f172a !important;
+}
+
+html.dark .text-gray-700 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-xs.text-gray-400 {
+  color: #64748b !important;
+}
