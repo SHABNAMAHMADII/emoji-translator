@@ -20,19 +20,19 @@ function LandingPage({ onGetStarted }) {
 
         {/* Description */}
         <p className="text-sm text-gray-500 max-w-sm mx-auto mb-8">
-          Turn your sentences into emojis. No letters. No limits. Just emotions.
+          Express yourself in a whole new way — through emojis.
         </p>
 
         {/* Features */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           <span className="bg-white shadow-sm text-gray-600 px-4 py-1.5 rounded-full text-sm font-medium border border-gray-200/60">
-            🤖 AI
+            🤖 AI Translation
           </span>
           <span className="bg-white shadow-sm text-gray-600 px-4 py-1.5 rounded-full text-sm font-medium border border-gray-200/60">
-            📋 Copy
+            📋 Instant Copy
           </span>
           <span className="bg-white shadow-sm text-gray-600 px-4 py-1.5 rounded-full text-sm font-medium border border-gray-200/60">
-            📚 History
+            📚 Smart History
           </span>
           <span className="bg-white shadow-sm text-gray-600 px-4 py-1.5 rounded-full text-sm font-medium border border-gray-200/60">
             🌙 Dark Mode
@@ -44,7 +44,7 @@ function LandingPage({ onGetStarted }) {
           onClick={onGetStarted}
           className="bg-coral hover:bg-coral/80 text-white text-base font-bold px-9 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
         >
-          Get Started
+          🚀 Get Started
         </button>
 
         {/* Footer */}
