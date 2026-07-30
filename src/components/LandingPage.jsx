@@ -2,7 +2,7 @@ import React from 'react';
 
 function LandingPage({ onGetStarted }) {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#FEF9F0] via-white to-[#FFE8D6]">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-amber-50/80 via-orange-50/60 to-rose-50/80">
       <div className="max-w-2xl w-full text-center">
         {/* Emoji */}
         <div className="text-6xl mb-5">✨</div>
@@ -13,27 +13,27 @@ function LandingPage({ onGetStarted }) {
         </h1>
 
         {/* Tagline */}
-        <p className="text-xl text-slate-500 font-light mb-2">
+        <p className="text-xl text-slate-600 font-medium mb-2">
           The art of expressing without words.
         </p>
 
         {/* Description */}
-        <p className="text-sm text-slate-400 max-w-sm mx-auto mb-8">
+        <p className="text-sm text-slate-500 max-w-sm mx-auto mb-8">
           Turn your sentences into emojis. No letters. No limits. Just emotions.
         </p>
 
         {/* Features */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
-          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+          <span className="bg-white/90 backdrop-blur-sm text-slate-700 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-200/60">
             🤖 AI
           </span>
-          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+          <span className="bg-white/90 backdrop-blur-sm text-slate-700 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-200/60">
             📋 Copy
           </span>
-          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+          <span className="bg-white/90 backdrop-blur-sm text-slate-700 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-200/60">
             📚 History
           </span>
-          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+          <span className="bg-white/90 backdrop-blur-sm text-slate-700 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-200/60">
             🌙 Dark Mode
           </span>
         </div>
@@ -41,7 +41,7 @@ function LandingPage({ onGetStarted }) {
         {/* Button */}
         <button
           onClick={onGetStarted}
-          className="bg-coral hover:bg-coral/90 text-white text-base font-medium px-9 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+          className="bg-coral hover:bg-coral/80 text-white text-base font-semibold px-9 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
         >
           Get Started
         </button>
