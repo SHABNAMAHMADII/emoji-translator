@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Copy, Check, FileText } from 'lucide-react';
 import { copyToClipboard } from '../utils/clipboard';
+import SpeechButton from './SpeechButton';
 
 function TranslationResult({ result, originalText }) {
   const [copied, setCopied] = useState(false);
@@ -26,24 +27,28 @@ function TranslationResult({ result, originalText }) {
         <div className="text-4xl sm:text-5xl leading-relaxed break-all">
           {result}
         </div>
-        <button
-          onClick={handleCopy}
-          className={`bg-coral dark:bg-[#e94560] text-white px-5 py-3 rounded-xl transition-all duration-200 hover:scale-105 flex items-center gap-2 font-bold shadow-md hover:shadow-lg ${
-            copied ? 'bg-green-500 dark:bg-green-500' : ''
-          }`}
-        >
-          {copied ? (
-            <>
-              <Check size={20} />
-              Copied! 🎉
-            </>
-          ) : (
-            <>
-              <Copy size={20} />
-              Copy
-            </>
-          )}
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={handleCopy}
+            className={`bg-coral dark:bg-[#e94560] text-white px-5 py-3 rounded-xl transition-all duration-200 hover:scale-105 flex items-center gap-2 font-bold shadow-md hover:shadow-lg ${
+              copied ? 'bg-green-500 dark:bg-green-500' : ''
+            }`}
+          >
+            {copied ? (
+              <>
+                <Check size={20} />
+                Copied! 🎉
+              </>
+            ) : (
+              <>
+                <Copy size={20} />
+                Copy
+              </>
+            )}
+          </button>
+          
+          <SpeechButton text={originalText} />
+        </div>
       </div>
     </div>
   );
