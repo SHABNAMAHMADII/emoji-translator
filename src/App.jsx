@@ -6,6 +6,7 @@ import HistoryItem from './components/HistoryItem';
 import EmptyState from './components/EmptyState';
 import HowItWorks from './components/HowItWorks';
 import EmojiStats from './components/EmojiStats';
+import ReverseTranslate from './components/ReverseTranslate';
 import LandingPage from './components/LandingPage';
 import { Clock } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
@@ -28,7 +29,6 @@ function App() {
     }
   }, [darkMode]);
 
-  // Load history from localStorage on mount
   useEffect(() => {
     const savedHistory = localStorage.getItem('emojiHistory');
     if (savedHistory) {
@@ -36,7 +36,6 @@ function App() {
     }
   }, []);
 
-  // Save history to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('emojiHistory', JSON.stringify(history));
   }, [history]);
@@ -72,7 +71,6 @@ function App() {
     setDarkMode(!darkMode);
   };
 
-  // Show Landing Page first
   if (showLanding) {
     return <LandingPage onGetStarted={() => setShowLanding(false)} />;
   }
@@ -137,6 +135,9 @@ function App() {
       </div>
 
       <EmojiStats history={history} />
+      
+      {/* Reverse Translate */}
+      <ReverseTranslate />
     </div>
   );
 }
