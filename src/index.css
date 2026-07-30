@@ -57,6 +57,14 @@
 }
 
 /* ========================================
+   WARM BACKGROUND COLOR
+   ======================================== */
+
+.bg-cream {
+  background-color: #FDF6F0;
+}
+
+/* ========================================
    DARK MODE STYLES
    ======================================== */
 
@@ -183,7 +191,6 @@ html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #c73652;
 }
 
-/* Dark mode button */
 html.dark .bg-white.dark\:bg-gray-800 {
   background-color: #1a1a2e !important;
 }
