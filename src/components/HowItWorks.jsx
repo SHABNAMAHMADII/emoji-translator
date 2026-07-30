@@ -2,7 +2,7 @@ import React from 'react';
 
 function HowItWorks() {
   return (
-    <div className="bg-white dark:bg-[#16213e] rounded-2xl shadow-md p-6 border border-gray-100 dark:border-[#0f3460]">
+    <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-md p-6 border border-gray-100 dark:border-[#334155]">
       <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
         <span>💡</span> How It Works
       </h3>
@@ -41,7 +41,7 @@ function HowItWorks() {
         </div>
       </div>
       
-      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-[#334155]">
         <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
           ✨ Powered by OpenRouter AI
         </p>
