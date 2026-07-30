@@ -57,18 +57,17 @@
 }
 
 /* ========================================
-   WARM BACKGROUND COLOR
+   WARM BACKGROUND COLOR — DARKER & RICHER
    ======================================== */
 
 .bg-cream {
-  background-color: #FDF6F0;
+  background-color: #F5EDE3;
 }
 
 /* ========================================
    DARK MODE STYLES
    ======================================== */
 
-/* Dark mode - applied when .dark class is on HTML */
 html.dark {
   background-color: #1a1a2e;
 }
