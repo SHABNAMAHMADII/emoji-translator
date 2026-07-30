@@ -6,10 +6,12 @@ import HistoryItem from './components/HistoryItem';
 import EmptyState from './components/EmptyState';
 import HowItWorks from './components/HowItWorks';
 import EmojiStats from './components/EmojiStats';
+import LandingPage from './components/LandingPage';
 import { Clock } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
 
 function App() {
+  const [showLanding, setShowLanding] = useState(true);
   const [history, setHistory] = useState([]);
   const [currentTranslation, setCurrentTranslation] = useState(null);
   const [darkMode, setDarkMode] = useState(() => {
@@ -25,6 +27,19 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  // Load history from localStorage on mount
+  useEffect(() => {
+    const savedHistory = localStorage.getItem('emojiHistory');
+    if (savedHistory) {
+      setHistory(JSON.parse(savedHistory));
+    }
+  }, []);
+
+  // Save history to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('emojiHistory', JSON.stringify(history));
+  }, [history]);
 
   const handleTranslate = async (text) => {
     setCurrentTranslation(null);
@@ -57,6 +72,11 @@ function App() {
     setDarkMode(!darkMode);
   };
 
+  // Show Landing Page first
+  if (showLanding) {
+    return <LandingPage onGetStarted={() => setShowLanding(false)} />;
+  }
+
   return (
     <div className="min-h-screen max-w-4xl mx-auto px-4 py-6 sm:py-10 transition-colors duration-300">
       <button
@@ -68,11 +88,6 @@ function App() {
       </button>
 
       <Header />
-      
-      {/* How It Works - Above input on mobile/tablet, side on laptop */}
-      <div className="lg:hidden mb-8">
-        <HowItWorks />
-      </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-3">
@@ -86,8 +101,7 @@ function App() {
           )}
         </div>
         
-        {/* How It Works - Side on laptop only */}
-        <div className="hidden lg:block lg:col-span-2">
+        <div className="lg:col-span-2">
           <div className="sticky top-6">
             <HowItWorks />
           </div>
@@ -122,7 +136,6 @@ function App() {
         )}
       </div>
 
-      {/* Emoji Statistics */}
       <EmojiStats history={history} />
     </div>
   );
