@@ -2,7 +2,7 @@ import React from 'react';
 
 function LandingPage({ onGetStarted }) {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-cream/80 via-white to-coral/10">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#FEF9F0] via-white to-[#FFE8D6]">
       <div className="max-w-2xl w-full text-center">
         {/* Emoji */}
         <div className="text-6xl mb-5">✨</div>
@@ -24,10 +24,18 @@ function LandingPage({ onGetStarted }) {
 
         {/* Features */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
-          <span className="bg-white/70 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">🤖 AI</span>
-          <span className="bg-white/70 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">📋 Copy</span>
-          <span className="bg-white/70 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">📚 History</span>
-          <span className="bg-white/70 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">🌙 Dark Mode</span>
+          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+            🤖 AI
+          </span>
+          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+            📋 Copy
+          </span>
+          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+            📚 History
+          </span>
+          <span className="bg-white/80 backdrop-blur-sm text-slate-600 px-4 py-1.5 rounded-full text-sm font-medium shadow-sm border border-slate-100/50">
+            🌙 Dark Mode
+          </span>
         </div>
 
         {/* Button */}
