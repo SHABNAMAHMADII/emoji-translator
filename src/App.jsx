@@ -71,8 +71,15 @@ function App() {
     setDarkMode(!darkMode);
   };
 
+  // Show Landing Page with dark mode support
   if (showLanding) {
-    return <LandingPage onGetStarted={() => setShowLanding(false)} />;
+    return (
+      <LandingPage
+        onGetStarted={() => setShowLanding(false)}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
   }
 
   return (
