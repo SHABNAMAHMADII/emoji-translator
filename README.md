@@ -1,12 +1,12 @@
-#  Emoji Translator
+# 😄 Emoji Translator
 
 **Turn words into emojis. No letters allowed.**
 
-Emoji Translator is a fun AI-powered web application that converts any sentence into expressive emoji-only messages. Perfect for chatting with friends, spicing up your social media posts, or just having fun with language!
+Emoji Translator is an AI-powered web application that converts any sentence into expressive emoji-only messages. Perfect for chatting with friends, spicing up your social media posts, or just having fun with language.
 
 ## 🌐 Live Demo
 
-https://emoji-translator-47zl.vercel.app/
+🔗 **https://emoji-translator-47zl.vercel.app/**
 
 ## ✨ Features
 
@@ -16,6 +16,11 @@ https://emoji-translator-47zl.vercel.app/
 - 🗑️ **Delete History** – Remove individual or all translations
 - 🎨 **Beautiful UI** – Clean, modern design with Tailwind CSS
 - 📱 **Responsive** – Works on desktop, tablet, and mobile
+- 🌙 **Dark Mode** – Toggle dark/light theme
+- 🔄 **Reverse Translate** – Convert emojis back into text
+- 🔊 **Speech Synthesis** – Listen to the original sentence read aloud
+- 🏠 **Landing Page** – Welcoming introduction to the app
+- 🔗 **Social Links** – Connect via GitHub, LinkedIn, or Email
 
 ## 🛠️ Technologies
 
@@ -76,6 +81,10 @@ emoji-translator/
 │   │   ├── EmptyState.jsx
 │   │   ├── Header.jsx
 │   │   ├── HistoryItem.jsx
+│   │   ├── HowItWorks.jsx
+│   │   ├── LandingPage.jsx
+│   │   ├── ReverseTranslate.jsx
+│   │   ├── SpeechButton.jsx
 │   │   ├── TranslationForm.jsx
 │   │   └── TranslationResult.jsx
 │   ├── hooks/
