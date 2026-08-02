@@ -98,7 +98,7 @@ function LandingPage({ onGetStarted, darkMode, toggleDarkMode }) {
             <Github className="w-5 h-5" />
           </a>
           <a
-            href="https://linkedin.com/in/shabnamahmadi"
+            href="https://www.linkedin.com/in/shabnam-ahmadi-755b56390"
             target="_blank"
             rel="noopener noreferrer"
             className={`p-2 rounded-full transition-all duration-200 hover:scale-110 ${
@@ -108,7 +108,7 @@ function LandingPage({ onGetStarted, darkMode, toggleDarkMode }) {
             <Linkedin className="w-5 h-5" />
           </a>
           <a
-            href="mailto:shabnam.ahmadi0016@gmail.com"
+            href="mailto:shabnam.ahmadi0018@gmail.com"
             className={`p-2 rounded-full transition-all duration-200 hover:scale-110 ${
               darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-800'
             }`}
