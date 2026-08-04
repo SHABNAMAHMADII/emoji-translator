@@ -8,7 +8,7 @@ import HowItWorks from './components/HowItWorks';
 import EmojiStats from './components/EmojiStats';
 import ReverseTranslate from './components/ReverseTranslate';
 import LandingPage from './components/LandingPage';
-import { Clock } from 'lucide-react';
+import { Clock, Home } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
 
 function App() {
@@ -71,7 +71,6 @@ function App() {
     setDarkMode(!darkMode);
   };
 
-  // Show Landing Page with dark mode support
   if (showLanding) {
     return (
       <LandingPage
@@ -84,21 +83,32 @@ function App() {
 
   return (
     <div className="min-h-screen bg-cream dark:bg-[#1a1a2e] transition-colors duration-300">
+      {/* Back to Home Button */}
+      <button
+        onClick={() => setShowLanding(true)}
+        className="fixed top-4 left-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
+        aria-label="Back to home"
+      >
+        <Home className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+      </button>
+
       {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 text-2xl"
+        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
         aria-label="Toggle dark mode"
       >
-        {darkMode ? '☀️' : '🌙'}
+        {darkMode ? (
+          <Sun className="w-5 h-5 text-yellow-500" />
+        ) : (
+          <Moon className="w-5 h-5 text-gray-700" />
+        )}
       </button>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <Header />
         
-        {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
-          {/* Left Column: Translation Form & Results */}
           <div className="lg:col-span-3 space-y-6">
             <TranslationForm onTranslate={handleTranslate} isLoading={isLoading} />
             
@@ -110,7 +120,6 @@ function App() {
             )}
           </div>
           
-          {/* Right Column: How It Works */}
           <div className="lg:col-span-2">
             <div className="sticky top-6">
               <HowItWorks />
@@ -127,14 +136,16 @@ function App() {
                   <Clock size={22} /> History
                   <span className="text-sm font-normal text-gray-400">({history.length})</span>
                 </h2>
-                {history.length > 1 && (
-                  <button
-                    onClick={handleClearAll}
-                    className="text-sm text-red-400 hover:text-red-600 dark:hover:text-red-300 transition-colors font-semibold px-3 py-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                  >
-                    Clear all
-                  </button>
-                )}
+                <div className="flex gap-2">
+                  {history.length > 1 && (
+                    <button
+                      onClick={handleClearAll}
+                      className="text-sm text-red-400 hover:text-red-600 dark:hover:text-red-300 transition-colors font-semibold px-3 py-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
+                    >
+                      Clear all
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="space-y-3 max-h-96 overflow-y-auto pr-1 custom-scrollbar">
                 {history.map((item) => (
@@ -147,10 +158,7 @@ function App() {
           )}
         </div>
 
-        {/* Emoji Statistics */}
         <EmojiStats history={history} />
-        
-        {/* Reverse Translate */}
         <ReverseTranslate />
       </div>
     </div>
