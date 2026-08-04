@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, ArrowRight, Moon, Sun } from 'lucide-react';
 
-const emojis = ['😀', '😃', '😄', '😍', '🥰', '😊', '😎', '🤩', '✨', '🔥', '💫', '🌟'];
+const emojis = ['😄', '😊', '😍', '🥰', '😎', '🤭', '👋'];
 
 function LandingPage({ onGetStarted, darkMode, toggleDarkMode }) {
   const [currentEmoji, setCurrentEmoji] = useState(0);
