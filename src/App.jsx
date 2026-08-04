@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import TranslationForm from './components/TranslationForm';
 import TranslationResult from './components/TranslationResult';
-import HistoryItem from './components/HistoryItem';
-import EmptyState from './components/EmptyState';
 import HowItWorks from './components/HowItWorks';
 import EmojiStats from './components/EmojiStats';
 import ReverseTranslate from './components/ReverseTranslate';
 import LandingPage from './components/LandingPage';
 import HistoryPage from './components/HistoryPage';
-import { Clock, Home, Moon, Sun } from 'lucide-react';
+import { Home, Moon, Sun, Clock } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
 
 function App() {
@@ -100,11 +98,11 @@ function App() {
 
   // Main App
   return (
-    <div className="min-h-screen bg-cream dark:bg-[#1a1a2e] transition-colors duration-300">
+    <div className="min-h-screen bg-[#f5f0eb] dark:bg-[#0f172a] transition-colors duration-300">
       {/* Back to Home Button */}
       <button
         onClick={() => setShowLanding(true)}
-        className="fixed top-4 left-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
+        className="fixed top-4 left-4 z-50 p-3 rounded-full bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
         aria-label="Back to home"
       >
         <Home className="w-5 h-5 text-gray-700 dark:text-gray-300" />
@@ -113,13 +111,13 @@ function App() {
       {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
+        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
         aria-label="Toggle dark mode"
       >
         {darkMode ? (
-          <Sun className="w-5 h-5 text-yellow-500" />
+          <Sun className="w-5 h-5 text-yellow-400" />
         ) : (
-          <Moon className="w-5 h-5 text-gray-700" />
+          <Moon className="w-5 h-5 text-gray-600" />
         )}
       </button>
 
@@ -145,49 +143,30 @@ function App() {
           </div>
         </div>
 
-        {/* History Section */}
+        {/* History Section - Only "View All" Button */}
         <div className="mt-10">
-          {history.length > 0 ? (
-            <div className="bg-white dark:bg-[#16213e] rounded-2xl shadow-md p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
-                  <Clock size={22} /> History
-                  <span className="text-sm font-normal text-gray-400">({history.length})</span>
+          <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-[#334155]">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <Clock size={20} className="text-coral" />
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+                  History
                 </h2>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setShowHistoryPage(true)}
-                    className="text-sm text-teal hover:text-coral transition-colors font-semibold"
-                  >
-                    View All
-                  </button>
-                  {history.length > 1 && (
-                    <button
-                      onClick={handleClearAll}
-                      className="text-sm text-red-400 hover:text-red-600 dark:hover:text-red-300 transition-colors font-semibold px-3 py-1 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20"
-                    >
-                      Clear all
-                    </button>
-                  )}
-                </div>
+                <span className="text-sm font-normal text-gray-400">({history.length})</span>
               </div>
-              <div className="space-y-3 max-h-96 overflow-y-auto pr-1 custom-scrollbar">
-                {history.slice(0, 5).map((item) => (
-                  <HistoryItem key={item.id} item={item} onDelete={handleDelete} />
-                ))}
-              </div>
-              {history.length > 5 && (
-                <button
-                  onClick={() => setShowHistoryPage(true)}
-                  className="mt-3 text-sm text-teal hover:text-coral transition-colors font-semibold w-full text-center"
-                >
-                  View all {history.length} translations →
-                </button>
-              )}
+              <button
+                onClick={() => setShowHistoryPage(true)}
+                className="text-sm text-teal hover:text-coral transition-colors font-medium"
+              >
+                View All →
+              </button>
             </div>
-          ) : (
-            <EmptyState />
-          )}
+            {history.length === 0 && (
+              <p className="text-sm text-gray-400 dark:text-gray-500 mt-3">
+                No translations yet. Start translating! 😊
+              </p>
+            )}
+          </div>
         </div>
 
         <EmojiStats history={history} />
