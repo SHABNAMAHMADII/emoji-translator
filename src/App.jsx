@@ -71,7 +71,6 @@ function App() {
     setDarkMode(!darkMode);
   };
 
-  // Show Landing Page
   if (showLanding) {
     return (
       <LandingPage
@@ -82,7 +81,6 @@ function App() {
     );
   }
 
-  // Show History Page
   if (showHistoryPage) {
     return (
       <HistoryPage
@@ -96,7 +94,6 @@ function App() {
     );
   }
 
-  // Main App
   return (
     <div className="min-h-screen bg-[#f5f0eb] dark:bg-[#0f172a] transition-colors duration-300">
       {/* Back to Home Button */}
@@ -124,7 +121,18 @@ function App() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         <Header />
         
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-6">
+        {/* History Button in Header */}
+        <div className="flex justify-end mt-2">
+          <button
+            onClick={() => setShowHistoryPage(true)}
+            className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-coral dark:hover:text-[#e94560] transition-colors font-medium"
+          >
+            <Clock size={16} />
+            History ({history.length})
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-4">
           <div className="lg:col-span-3 space-y-6">
             <TranslationForm onTranslate={handleTranslate} isLoading={isLoading} />
             
@@ -140,32 +148,6 @@ function App() {
             <div className="sticky top-6">
               <HowItWorks />
             </div>
-          </div>
-        </div>
-
-        {/* History Section - Only "View All" Button */}
-        <div className="mt-10">
-          <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-[#334155]">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <Clock size={20} className="text-coral" />
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
-                  History
-                </h2>
-                <span className="text-sm font-normal text-gray-400">({history.length})</span>
-              </div>
-              <button
-                onClick={() => setShowHistoryPage(true)}
-                className="text-sm text-teal hover:text-coral transition-colors font-medium"
-              >
-                View All →
-              </button>
-            </div>
-            {history.length === 0 && (
-              <p className="text-sm text-gray-400 dark:text-gray-500 mt-3">
-                No translations yet. Start translating! 😊
-              </p>
-            )}
           </div>
         </div>
 
