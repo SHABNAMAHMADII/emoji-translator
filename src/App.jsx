@@ -95,7 +95,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f5f0eb] dark:bg-[#0f172a] transition-colors duration-300">
+    <div className="min-h-screen bg-cream dark:bg-[#0f172a] transition-colors duration-300">
       {/* Back to Home Button */}
       <button
         onClick={() => setShowLanding(true)}
