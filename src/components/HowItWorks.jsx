@@ -1,11 +1,11 @@
 import React from 'react';
-import { PenLine, Sparkles, Smile, Share2 } from 'lucide-react';
+import { PenLine, Zap, Smile, Share2, Lightbulb } from 'lucide-react';
 
 function HowItWorks() {
   return (
     <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-[#334155]">
       <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-5 flex items-center gap-2">
-        <Sparkles size={18} className="text-coral" /> 
+        <Lightbulb size={18} className="text-yellow-500 dark:text-yellow-400" />
         How It Works
       </h3>
 
@@ -24,7 +24,7 @@ function HowItWorks() {
         {/* Step 2 */}
         <div className="flex items-start gap-3">
           <div className="bg-teal/10 dark:bg-[#00d2d3]/10 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
-            <Sparkles size={16} className="text-teal dark:text-[#00d2d3]" />
+            <Zap size={16} className="text-teal dark:text-[#00d2d3]" />
           </div>
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-white">Click Translate</p>
