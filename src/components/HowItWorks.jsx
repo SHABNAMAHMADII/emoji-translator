@@ -1,59 +1,58 @@
 import React from 'react';
-import { Type, Sparkles, Smile, Share2 } from 'lucide-react';
+import { PenLine, Sparkles, Smile, Share2 } from 'lucide-react';
 
 function HowItWorks() {
   return (
-    <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-md p-6 border border-gray-100 dark:border-[#334155]">
-      <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-        <Sparkles size={20} className="text-coral" /> How It Works
+    <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow-sm p-6 border border-gray-100 dark:border-[#334155]">
+      <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-5 flex items-center gap-2">
+        <Sparkles size={18} className="text-coral" /> 
+        How It Works
       </h3>
-      
-      <div className="space-y-4">
-        <div className="flex gap-3 items-start">
-          <span className="bg-coral dark:bg-[#e94560] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
+
+      <div className="space-y-5">
+        {/* Step 1 */}
+        <div className="flex items-start gap-3">
+          <div className="bg-coral/10 dark:bg-[#e94560]/10 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+            <PenLine size={16} className="text-coral dark:text-[#e94560]" />
+          </div>
           <div>
-            <p className="font-semibold text-sm text-gray-800 dark:text-white flex items-center gap-1">
-              <Type size={14} /> Type Your Sentence
-            </p>
-            <p className="text-gray-500 dark:text-gray-400 text-sm">Write anything you want to translate</p>
+            <p className="text-sm font-semibold text-gray-800 dark:text-white">Type Your Sentence</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Write anything you want to translate</p>
           </div>
         </div>
-        
-        <div className="flex gap-3 items-start">
-          <span className="bg-coral dark:bg-[#e94560] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
+
+        {/* Step 2 */}
+        <div className="flex items-start gap-3">
+          <div className="bg-teal/10 dark:bg-[#00d2d3]/10 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+            <Sparkles size={16} className="text-teal dark:text-[#00d2d3]" />
+          </div>
           <div>
-            <p className="font-semibold text-sm text-gray-800 dark:text-white flex items-center gap-1">
-              <Sparkles size={14} /> Click Translate
-            </p>
-            <p className="text-gray-500 dark:text-gray-400 text-sm">AI reads and understands your message</p>
+            <p className="text-sm font-semibold text-gray-800 dark:text-white">Click Translate</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">AI reads and understands your message</p>
           </div>
         </div>
-        
-        <div className="flex gap-3 items-start">
-          <span className="bg-coral dark:bg-[#e94560] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
+
+        {/* Step 3 */}
+        <div className="flex items-start gap-3">
+          <div className="bg-yellow-100 dark:bg-yellow-900/20 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+            <Smile size={16} className="text-yellow-600 dark:text-yellow-400" />
+          </div>
           <div>
-            <p className="font-semibold text-sm text-gray-800 dark:text-white flex items-center gap-1">
-              <Smile size={14} /> Get Emojis
-            </p>
-            <p className="text-gray-500 dark:text-gray-400 text-sm">Your sentence becomes emoji-only magic</p>
+            <p className="text-sm font-semibold text-gray-800 dark:text-white">Get Emojis</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Your sentence becomes emoji-only magic</p>
           </div>
         </div>
-        
-        <div className="flex gap-3 items-start">
-          <span className="bg-coral dark:bg-[#e94560] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
+
+        {/* Step 4 */}
+        <div className="flex items-start gap-3">
+          <div className="bg-purple-100 dark:bg-purple-900/20 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
+            <Share2 size={16} className="text-purple-600 dark:text-purple-400" />
+          </div>
           <div>
-            <p className="font-semibold text-sm text-gray-800 dark:text-white flex items-center gap-1">
-              <Share2 size={14} /> Copy & Share
-            </p>
-            <p className="text-gray-500 dark:text-gray-400 text-sm">Copy with one click and share anywhere</p>
+            <p className="text-sm font-semibold text-gray-800 dark:text-white">Copy & Share</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Copy with one click and share anywhere</p>
           </div>
         </div>
-      </div>
-      
-      <div className="mt-4 pt-4 border-t border-gray-100 dark:border-[#334155]">
-        <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
-          ✨ Powered by OpenRouter AI
-        </p>
       </div>
     </div>
   );
