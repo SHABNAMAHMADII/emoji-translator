@@ -7,7 +7,7 @@ import EmojiStats from './components/EmojiStats';
 import ReverseTranslate from './components/ReverseTranslate';
 import LandingPage from './components/LandingPage';
 import HistoryPage from './components/HistoryPage';
-import { Home, Moon, Sun } from 'lucide-react';
+import { Home, Moon, Sun, Clock } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
 
 function App() {
@@ -96,7 +96,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#f5f0eb] dark:bg-[#0f172a] transition-colors duration-300">
-      {/* Fixed Buttons */}
+      {/* Back to Home Button */}
       <button
         onClick={() => setShowLanding(true)}
         className="fixed top-4 left-4 z-50 p-3 rounded-full bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
@@ -105,6 +105,7 @@ function App() {
         <Home className="w-5 h-5 text-gray-700 dark:text-gray-300" />
       </button>
 
+      {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
         className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
@@ -115,6 +116,18 @@ function App() {
         ) : (
           <Moon className="w-5 h-5 text-gray-600" />
         )}
+      </button>
+
+      {/* History Button */}
+      <button
+        onClick={() => setShowHistoryPage(true)}
+        className="fixed top-4 right-20 z-50 p-3 rounded-full bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 flex items-center gap-1.5"
+        aria-label="View history"
+      >
+        <Clock className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+        <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+          {history.length}
+        </span>
       </button>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
