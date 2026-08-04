@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ArrowRight, Moon, Sun } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, Moon, Sun, Bot, Copy, History, MoonStar } from 'lucide-react';
 
 const emojis = ['😄', '🥰', '😉', '😝', '😎', '☀️', '🌛', '🌈', '🩷'];
 
@@ -15,29 +15,29 @@ function LandingPage({ onGetStarted, darkMode, toggleDarkMode }) {
 
   return (
     <div className={`min-h-screen flex items-center justify-center px-4 transition-colors duration-300 ${
-      darkMode ? 'bg-[#1a1a2e]' : 'bg-[#F5EDE3]'
+      darkMode ? 'bg-[#0f172a]' : 'bg-[#f3eeea]'
     }`}>
       {/* Dark Mode Toggle */}
       <button
         onClick={toggleDarkMode}
-        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
+        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-[#1e293b] shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105"
         aria-label="Toggle dark mode"
       >
         {darkMode ? (
-          <Sun className="w-5 h-5 text-yellow-500" />
+          <Sun className="w-5 h-5 text-yellow-400" />
         ) : (
-          <Moon className="w-5 h-5 text-gray-700" />
+          <Moon className="w-5 h-5 text-gray-600" />
         )}
       </button>
 
       {/* Main Card */}
-      <div className={`max-w-4xl w-full rounded-3xl shadow-2xl overflow-hidden transition-colors duration-300 ${
+      <div className={`max-w-4xl w-full rounded-2xl shadow-xl overflow-hidden transition-colors duration-300 ${
         darkMode ? 'bg-[#1e293b]' : 'bg-white'
       }`}>
         <div className="flex flex-col md:flex-row">
           {/* Left Side: Rotating Emoji */}
-          <div className={`w-full md:w-1/3 flex items-center justify-center p-8 md:p-12 ${
-            darkMode ? 'bg-[#16213e]' : 'bg-gradient-to-br from-coral/10 to-teal/10'
+          <div className={`w-full md:w-2/5 flex items-center justify-center p-8 md:p-12 ${
+            darkMode ? 'bg-[#0f172a]' : 'bg-[#f8f4f0]'
           }`}>
             <div className="text-8xl md:text-9xl transition-all duration-500 animate-float">
               {emojis[currentEmoji]}
@@ -45,9 +45,9 @@ function LandingPage({ onGetStarted, darkMode, toggleDarkMode }) {
           </div>
 
           {/* Right Side: Content */}
-          <div className="w-full md:w-2/3 p-8 md:p-12">
+          <div className="w-full md:w-3/5 p-8 md:p-10">
             {/* Title */}
-            <h1 className={`text-4xl md:text-5xl font-extrabold tracking-tight mb-2 ${
+            <h1 className={`text-3xl md:text-4xl font-bold tracking-tight mb-1 ${
               darkMode ? 'text-white' : 'text-gray-800'
             }`}>
               <span className="text-coral">Emoji</span>
@@ -55,99 +55,97 @@ function LandingPage({ onGetStarted, darkMode, toggleDarkMode }) {
             </h1>
 
             {/* Tagline */}
-            <p className={`text-lg md:text-xl font-medium mb-1 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
+            <p className={`text-base md:text-lg font-medium mb-1 ${
+              darkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
               The art of expressing without words.
             </p>
 
-            {/* Description with emojis */}
-            <p className={`text-sm mb-6 ${
-              darkMode ? 'text-gray-400' : 'text-gray-600'
+            {/* Description */}
+            <p className={`text-sm mb-5 ${
+              darkMode ? 'text-gray-400' : 'text-gray-500'
             }`}>
-              ✨ Express yourself in a whole new way — through emojis. 😊
+              Express yourself in a whole new way — through emojis.
             </p>
 
-            {/* Features with Emojis */}
+            {/* Features with Icons */}
             <div className="grid grid-cols-2 gap-2 mb-6">
-              <div className={`flex items-center gap-2 p-2 rounded-lg ${
-                darkMode ? 'bg-[#0f172a]' : 'bg-gray-50'
+              <div className={`flex items-center gap-2.5 p-2 rounded-lg ${
+                darkMode ? 'bg-[#0f172a]' : 'bg-[#f8f4f0]'
               }`}>
-                <span className="text-lg">🤖</span>
+                <Bot className={`w-4 h-4 ${darkMode ? 'text-coral' : 'text-coral'}`} />
                 <span className={`text-xs font-medium ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
                 }`}>AI Translation</span>
               </div>
-              <div className={`flex items-center gap-2 p-2 rounded-lg ${
-                darkMode ? 'bg-[#0f172a]' : 'bg-gray-50'
+              <div className={`flex items-center gap-2.5 p-2 rounded-lg ${
+                darkMode ? 'bg-[#0f172a]' : 'bg-[#f8f4f0]'
               }`}>
-                <span className="text-lg">📋</span>
+                <Copy className={`w-4 h-4 ${darkMode ? 'text-teal' : 'text-teal'}`} />
                 <span className={`text-xs font-medium ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
                 }`}>Instant Copy</span>
               </div>
-              <div className={`flex items-center gap-2 p-2 rounded-lg ${
-                darkMode ? 'bg-[#0f172a]' : 'bg-gray-50'
+              <div className={`flex items-center gap-2.5 p-2 rounded-lg ${
+                darkMode ? 'bg-[#0f172a]' : 'bg-[#f8f4f0]'
               }`}>
-                <span className="text-lg">📚</span>
+                <History className={`w-4 h-4 ${darkMode ? 'text-coral' : 'text-coral'}`} />
                 <span className={`text-xs font-medium ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
                 }`}>Smart History</span>
               </div>
-              <div className={`flex items-center gap-2 p-2 rounded-lg ${
-                darkMode ? 'bg-[#0f172a]' : 'bg-gray-50'
+              <div className={`flex items-center gap-2.5 p-2 rounded-lg ${
+                darkMode ? 'bg-[#0f172a]' : 'bg-[#f8f4f0]'
               }`}>
-                <span className="text-lg">🌙</span>
+                <MoonStar className={`w-4 h-4 ${darkMode ? 'text-teal' : 'text-teal'}`} />
                 <span className={`text-xs font-medium ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
                 }`}>Dark Mode</span>
               </div>
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={onGetStarted}
-                className="bg-coral hover:bg-coral/80 text-white text-base font-bold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
-              >
-                Get Started <ArrowRight size={18} />
-              </button>
-            </div>
+            {/* Get Started Button */}
+            <button
+              onClick={onGetStarted}
+              className="bg-coral hover:bg-coral/80 text-white text-sm font-semibold px-7 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+            >
+              Get Started <ArrowRight size={16} />
+            </button>
 
             {/* Social Links */}
-            <div className="mt-6 flex gap-3">
+            <div className="mt-5 flex gap-2.5">
               <a
                 href="https://github.com/shabnamahmadii"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-2 rounded-full transition-all duration-200 hover:scale-110 ${
-                  darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-800'
+                className={`p-1.5 rounded-full transition-all duration-200 hover:scale-110 ${
+                  darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-gray-700'
                 }`}
               >
-                <Github size={18} />
+                <Github size={16} />
               </a>
               <a
                 href="https://www.linkedin.com/in/shabnam-ahmadi-755b56390"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-2 rounded-full transition-all duration-200 hover:scale-110 ${
-                  darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-800'
+                className={`p-1.5 rounded-full transition-all duration-200 hover:scale-110 ${
+                  darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-gray-700'
                 }`}
               >
-                <Linkedin size={18} />
+                <Linkedin size={16} />
               </a>
               <a
                 href="mailto:shabnam.ahmadi0018@gmail.com"
-                className={`p-2 rounded-full transition-all duration-200 hover:scale-110 ${
-                  darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-800'
+                className={`p-1.5 rounded-full transition-all duration-200 hover:scale-110 ${
+                  darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-400 hover:text-gray-700'
                 }`}
               >
-                <Mail size={18} />
+                <Mail size={16} />
               </a>
             </div>
 
             {/* Footer */}
-            <p className={`text-xs mt-4 ${
+            <p className={`text-[10px] mt-4 ${
               darkMode ? 'text-gray-500' : 'text-gray-400'
             }`}>
               Powered by OpenRouter AI • Built with React & Tailwind
