@@ -8,11 +8,13 @@ import HowItWorks from './components/HowItWorks';
 import EmojiStats from './components/EmojiStats';
 import ReverseTranslate from './components/ReverseTranslate';
 import LandingPage from './components/LandingPage';
-import { Clock, Home } from 'lucide-react';
+import HistoryPage from './components/HistoryPage';
+import { Clock, Home, Moon, Sun } from 'lucide-react';
 import useEmojiTranslation from './hooks/useEmojiTranslation';
 
 function App() {
   const [showLanding, setShowLanding] = useState(true);
+  const [showHistoryPage, setShowHistoryPage] = useState(false);
   const [history, setHistory] = useState([]);
   const [currentTranslation, setCurrentTranslation] = useState(null);
   const [darkMode, setDarkMode] = useState(() => {
@@ -71,6 +73,7 @@ function App() {
     setDarkMode(!darkMode);
   };
 
+  // Show Landing Page
   if (showLanding) {
     return (
       <LandingPage
@@ -81,6 +84,21 @@ function App() {
     );
   }
 
+  // Show History Page
+  if (showHistoryPage) {
+    return (
+      <HistoryPage
+        history={history}
+        onDelete={handleDelete}
+        onClearAll={handleClearAll}
+        onBack={() => setShowHistoryPage(false)}
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
+
+  // Main App
   return (
     <div className="min-h-screen bg-cream dark:bg-[#1a1a2e] transition-colors duration-300">
       {/* Back to Home Button */}
@@ -137,6 +155,12 @@ function App() {
                   <span className="text-sm font-normal text-gray-400">({history.length})</span>
                 </h2>
                 <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowHistoryPage(true)}
+                    className="text-sm text-teal hover:text-coral transition-colors font-semibold"
+                  >
+                    View All
+                  </button>
                   {history.length > 1 && (
                     <button
                       onClick={handleClearAll}
@@ -148,10 +172,18 @@ function App() {
                 </div>
               </div>
               <div className="space-y-3 max-h-96 overflow-y-auto pr-1 custom-scrollbar">
-                {history.map((item) => (
+                {history.slice(0, 5).map((item) => (
                   <HistoryItem key={item.id} item={item} onDelete={handleDelete} />
                 ))}
               </div>
+              {history.length > 5 && (
+                <button
+                  onClick={() => setShowHistoryPage(true)}
+                  className="mt-3 text-sm text-teal hover:text-coral transition-colors font-semibold w-full text-center"
+                >
+                  View all {history.length} translations →
+                </button>
+              )}
             </div>
           ) : (
             <EmptyState />
