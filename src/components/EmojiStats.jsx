@@ -1,4 +1,5 @@
 import React from 'react';
+import { BarChart } from 'lucide-react';
 
 function EmojiStats({ history }) {
   // Count emojis from history
@@ -17,9 +18,9 @@ function EmojiStats({ history }) {
   }
 
   return (
-    <div className="card dark:bg-[#16213e] dark:border dark:border-[#0f3460] mt-6">
+    <div className="card dark:bg-[#1e293b] dark:border dark:border-[#334155] mt-6">
       <h3 className="text-lg font-bold text-charcoal dark:text-white mb-3 flex items-center gap-2">
-        📊 Your Top Emojis
+        <BarChart size={20} className="text-coral" /> Your Top Emojis
       </h3>
       <div className="flex flex-wrap gap-4 text-3xl">
         {topEmojis.map(([emoji, count]) => (
