@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ArrowRight, Moon, Sun, Bot, Copy, History, MoonStar } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, Moon, Sun, Bot, ArrowLeftRight, Volume2, History } from 'lucide-react';
 
 const emojis = ['😄', '🥰', '😉', '😝', '😎', '☀️', '🌛', '🌈', '🩷'];
 
@@ -81,26 +81,26 @@ function LandingPage({ onGetStarted, darkMode, toggleDarkMode }) {
               <div className={`flex items-center gap-3 p-2.5 rounded-lg ${
                 darkMode ? 'bg-[#0f172a]' : 'bg-[#f5f0eb]'
               }`}>
-                <Copy className={`w-4 h-4 ${darkMode ? 'text-[#00d2d3]' : 'text-teal'}`} />
+                <ArrowLeftRight className={`w-4 h-4 ${darkMode ? 'text-[#00d2d3]' : 'text-teal'}`} />
                 <span className={`text-sm font-medium ${
                   darkMode ? 'text-gray-200' : 'text-gray-700'
-                }`}>Instant Copy</span>
+                }`}>Reverse Translate</span>
               </div>
               <div className={`flex items-center gap-3 p-2.5 rounded-lg ${
                 darkMode ? 'bg-[#0f172a]' : 'bg-[#f5f0eb]'
               }`}>
-                <History className={`w-4 h-4 ${darkMode ? 'text-[#e94560]' : 'text-coral'}`} />
+                <Volume2 className={`w-4 h-4 ${darkMode ? 'text-[#e94560]' : 'text-coral'}`} />
+                <span className={`text-sm font-medium ${
+                  darkMode ? 'text-gray-200' : 'text-gray-700'
+                }`}>Speech</span>
+              </div>
+              <div className={`flex items-center gap-3 p-2.5 rounded-lg ${
+                darkMode ? 'bg-[#0f172a]' : 'bg-[#f5f0eb]'
+              }`}>
+                <History className={`w-4 h-4 ${darkMode ? 'text-[#00d2d3]' : 'text-teal'}`} />
                 <span className={`text-sm font-medium ${
                   darkMode ? 'text-gray-200' : 'text-gray-700'
                 }`}>Smart History</span>
-              </div>
-              <div className={`flex items-center gap-3 p-2.5 rounded-lg ${
-                darkMode ? 'bg-[#0f172a]' : 'bg-[#f5f0eb]'
-              }`}>
-                <MoonStar className={`w-4 h-4 ${darkMode ? 'text-[#00d2d3]' : 'text-teal'}`} />
-                <span className={`text-sm font-medium ${
-                  darkMode ? 'text-gray-200' : 'text-gray-700'
-                }`}>Dark Mode</span>
               </div>
             </div>
 
