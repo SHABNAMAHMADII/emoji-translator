@@ -1,35 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
 function SpeechButton({ text }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [voices, setVoices] = useState([]);
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      setVoices(availableVoices);
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, []);
+
+  const getPreferredVoice = () => {
+    // Priority list for Windows + Chrome
+    const preferredNames = [
+      'Google UK English Female',
+      'Google US English Female',
+      'Microsoft Zira',
+      'Microsoft Jessa',
+      'Microsoft Hazel',
+      'Samantha',
+      'Victoria',
+      'Karen',
+      'Moira',
+    ];
+
+    for (const name of preferredNames) {
+      const matchedVoice = voices.find(voice =>
+        voice.name.toLowerCase().includes(name.toLowerCase())
+      );
+      if (matchedVoice) return matchedVoice;
+    }
+
+    const femalePatterns = ['female', 'zira', 'jessa', 'hazel', 'samantha', 'victoria', 'karen', 'moira'];
+    for (const pattern of femalePatterns) {
+      const matchedVoice = voices.find(voice =>
+        voice.lang.startsWith('en') &&
+        voice.name.toLowerCase().includes(pattern)
+      );
+      if (matchedVoice) return matchedVoice;
+    }
+
+    const usVoice = voices.find(voice => voice.lang === 'en-US');
+    if (usVoice) return usVoice;
+
+    const englishVoice = voices.find(voice => voice.lang.startsWith('en'));
+    if (englishVoice) return englishVoice;
+
+    return voices[0] || null;
+  };
 
   const handleSpeak = () => {
     if (!text || isSpeaking) return;
 
-    // Check if browser supports speech synthesis
     if (!window.speechSynthesis) {
       alert('Sorry, your browser does not support speech synthesis.');
       return;
     }
 
-    // Cancel any ongoing speech
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
+    utterance.rate = 0.85;
+    utterance.pitch = 1.1;
+    utterance.volume = 1;
+
+    const preferredVoice = getPreferredVoice();
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
+      console.log('Using voice:', preferredVoice.name);
+    }
 
     setIsSpeaking(true);
 
-    utterance.onend = () => {
-      setIsSpeaking(false);
-    };
-
-    utterance.onerror = () => {
-      setIsSpeaking(false);
-    };
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
 
     window.speechSynthesis.speak(utterance);
   };
