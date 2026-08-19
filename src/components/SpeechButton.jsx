@@ -20,7 +20,6 @@ function SpeechButton({ text }) {
   }, []);
 
   const getPreferredVoice = () => {
-    // Priority list for Windows + Chrome
     const preferredNames = [
       'Google UK English Female',
       'Google US English Female',
@@ -70,8 +69,8 @@ function SpeechButton({ text }) {
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
-    utterance.rate = 0.85;
-    utterance.pitch = 1.1;
+    utterance.rate = 0.8;    // slower and more relaxed
+    utterance.pitch = 1.0;   // natural, not too high
     utterance.volume = 1;
 
     const preferredVoice = getPreferredVoice();
